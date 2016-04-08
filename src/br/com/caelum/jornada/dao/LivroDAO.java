@@ -16,7 +16,14 @@ public class LivroDAO {
 	private EntityManager manager;
 	
 	public void cadastra(Livro livro) {
+		System.out.println("cadastro");
 		manager.persist(livro);
+	}
+	
+	public void atualiza(Livro livro) {
+		System.out.println(livro.getId());
+		System.out.println("atualiza");
+		manager.merge(livro);
 	}
 	
 	public void remove(Livro livro) {

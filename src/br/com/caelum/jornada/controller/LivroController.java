@@ -41,6 +41,20 @@ public class LivroController {
 		return mv;
 	}
 
+	@RequestMapping("/alteraLivro")
+	public ModelAndView preparaAlteracao(Integer id) {
+		Livro livro = dao.buscaPorId(id);
+		ModelAndView mv = new ModelAndView("cadastro_livros");
+		mv.addObject("livro", livro);
+		return mv;
+	}
+	
+	@RequestMapping("/concluirAlteracao")
+	public String alterar(Livro livro) {
+		dao.atualiza(livro);
+		return "redirect:listaLivros";
+	}
+	
 	@RequestMapping("/removeLivro")
 	public String removeLivro(Integer id) {
 		Livro livro = dao.buscaPorId(id);

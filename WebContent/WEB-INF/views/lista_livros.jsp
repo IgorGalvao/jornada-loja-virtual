@@ -36,11 +36,13 @@
 						<td><fmt:formatNumber type="currency" value="${livro.precoLivro}"/>
 						<td><fmt:formatNumber type="currency" value="${livro.precoEbook}"/>
 						<td><fmt:formatNumber type="currency" value="${livro.precoCombo}"/>
-						<td>Altera
+						<td><a href="alteraLivro?id=${livro.id}">Altera</a>
 						<td><a href="removeLivro?id=${livro.id}">Remove</a>
 				</c:forEach>
 			</tbody>
 		</table>
+		
+		<h4><a href="<c:url value="/cadastroLivros"/>">Cadastra novo livro</a></h4>
 	</div>
 </body>
 </html>
