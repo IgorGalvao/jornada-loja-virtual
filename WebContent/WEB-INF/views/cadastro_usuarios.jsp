@@ -30,10 +30,12 @@
 			<div class="form-group">
 				<label for="perfil">Perfil</label>
 				<div class="radio">
-					<label><input type="radio" name="perfil" id="perfilPadrao" value="Padrão" checked>Padrão</label>
+					<label><input type="radio" name="perfil" id="perfilPadrao" value="Padrão"
+							<c:if test="${usuario.perfil == 'Padrão'}">checked</c:if>>Padrão</label>
 				</div>
 				<div class="radio">
-					<label><input type="radio" name="perfil" id="perfilAdministrador" value="Administrador">Administrador</label>
+					<label><input type="radio" name="perfil" id="perfilAdministrador" value="Administrador"
+							<c:if test="${usuario.perfil == 'Administrador'}">checked</c:if>>Administrador</label>
 				</div>
 			</div>
 			<input type="submit" value="<c:out value="${empty usuario.id ? 'Cadastrar' : 'Concluir Alteração'}" />" class="btn">
