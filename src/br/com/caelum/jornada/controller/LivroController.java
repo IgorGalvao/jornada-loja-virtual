@@ -49,7 +49,7 @@ public class LivroController {
 		return mv;
 	}
 	
-	@RequestMapping("/concluirAlteracao")
+	@RequestMapping("/concluirAlteracaoLivro")
 	public String alterar(Livro livro) {
 		dao.atualiza(livro);
 		return "redirect:listaLivros";

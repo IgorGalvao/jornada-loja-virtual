@@ -13,7 +13,7 @@
 	
 	<div class="container">
 		<h2><c:out value="${empty livro.id ? 'Cadastrar novo livro' : 'Alterar dados cadastrados'}" /></h2>
-			<form action="<c:out value="${empty livro.id ? 'cadastraLivro' : 'concluirAlteracao'}" />" method="post">
+			<form action="<c:out value="${empty livro.id ? 'cadastraLivro' : 'concluirAlteracaoLivro'}" />" method="post">
 			<input type="hidden" id="id" name="id" value="${livro.id}">
 			<div class="form-group">
 				<label for="titulo">Título</label>
