@@ -22,10 +22,10 @@
 					<th>Remover
 			</thead>
 			<tbody>
-				<c:forEach items="${cupon}" var="cupom">
+				<c:forEach items="${cupons}" var="cupom">
 					<tr><td>${cupom.id}
-						<td>${cupom.validade}
-						<td>${cupom.desconto}
+						<td><fmt:formatDate value="${cupom.validade.time}" pattern="dd/MM/yyyy" />
+						<td><fmt:formatNumber type="percent" maxIntegerDigits="2" value="${cupom.desconto}" />
 						<td><a href="alteraCupom?id=${cupom.id}">Altera</a>
 						<td><a href="removeCupom?id=${cupom.id}">Remove</a>
 				</c:forEach>

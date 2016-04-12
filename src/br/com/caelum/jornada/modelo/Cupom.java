@@ -1,17 +1,25 @@
 package br.com.caelum.jornada.modelo;
 
-import java.time.LocalDate;
+import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 
 @Entity
-public class CupomDesconto {
+public class Cupom {
 
 	@Id @GeneratedValue
 	private Integer id;
-	private LocalDate validade;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Calendar validade;
+	@NumberFormat(style = NumberFormat.Style.PERCENT)
 	private double desconto;
 	
 	
@@ -21,10 +29,10 @@ public class CupomDesconto {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public LocalDate getValidade() {
+	public Calendar getValidade() {
 		return validade;
 	}
-	public void setValidade(LocalDate validade) {
+	public void setValidade(Calendar validade) {
 		this.validade = validade;
 	}
 	public double getDesconto() {

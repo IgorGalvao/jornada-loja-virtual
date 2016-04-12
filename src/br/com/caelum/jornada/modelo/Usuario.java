@@ -1,6 +1,8 @@
 package br.com.caelum.jornada.modelo;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -12,6 +14,7 @@ public class Usuario {
 	private String login;
 	private String senha;
 	private String email;
+	@Enumerated(EnumType.STRING)
 	private Perfil perfil;
 	
 	
