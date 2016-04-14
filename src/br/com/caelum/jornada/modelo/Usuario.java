@@ -1,5 +1,6 @@
 package br.com.caelum.jornada.modelo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,8 +12,10 @@ public class Usuario {
 
 	@Id @GeneratedValue
 	private Integer id;
+	@Column(unique=true, nullable=false, updatable=false)
 	private String login;
 	private String senha;
+	@Column(unique=true, nullable=false)
 	private String email;
 	@Enumerated(EnumType.STRING)
 	private Perfil perfil;
