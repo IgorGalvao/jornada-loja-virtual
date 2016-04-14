@@ -24,7 +24,7 @@
 			<div class="form-group">
 				<label for="capa">Porcentagem de Desconto</label>
 				<input type="text" id="desconto" name="desconto" class="form-control"
-						value="<fmt:formatNmber type="percent" maxIntegerDigits="2" value="${cupom.desconto}" />">
+						value="<fmt:formatNumber type="percent" maxIntegerDigits="2" value="${cupom.desconto}" />">
 			</div>
 			<input type="submit" value="<c:out value="${empty cupom.id ? 'Cadastrar' : 'Concluir Alteração'}" />" class="btn">
 		</form>

@@ -43,6 +43,7 @@
 	
 	<mvc:interceptors>
 		<bean class="br.com.caelum.jornada.interceptor.AutorizadorInterceptor" />
+		<bean class="br.com.caelum.jornada.interceptor.AdministradorInterceptor" />
 	</mvc:interceptors>
 
 </beans>

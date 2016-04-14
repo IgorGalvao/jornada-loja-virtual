@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
+import br.com.caelum.jornada.modelo.Perfil;
 import br.com.caelum.jornada.modelo.Usuario;
 
 @Repository
@@ -34,6 +35,13 @@ public class UsuarioDAO {
 		return manager.find(Usuario.class, id);
 	}
 	
+	public Perfil buscaPerfil(Usuario usuario) {
+		Query query = manager.createQuery("select u from Usuario u where u.login = :login");
+		query.setParameter("login", usuario.getLogin());
+		Usuario retorno = (Usuario) query.getSingleResult();
+		return retorno.getPerfil();
+	}
+
 	public List<Usuario> listaTodos() {
 		return manager.createQuery("select u from Usuario u").getResultList();
 	}
@@ -54,4 +62,5 @@ public class UsuarioDAO {
 		}
 		return false;
 	}
+
 }
