@@ -22,8 +22,8 @@ public class UsuarioController {
 		this.dao = dao;
 	}
 	
-	@RequestMapping("/cadastroUsuarios")
-	public String metodo() {
+	@RequestMapping("/admin/cadastroUsuarios")
+	public String cadastroUsuarios() {
 		return "cadastro_usuarios";
 	}
 	

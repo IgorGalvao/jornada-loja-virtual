@@ -20,17 +20,12 @@ public class AdministradorInterceptor extends HandlerInterceptorAdapter {
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object controller) throws Exception {
-		
-		if(request.getSession().getAttribute("usuarioLogado") == null) {
-			return true;
-		}
-		
-		String uri = request.getRequestURI();
+
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
 		Perfil perfil = dao.buscaPerfil(usuario);
 		
-		if(uri.contains("/cadastr") && perfil == Perfil.Padrão) {
-			response.sendRedirect("acessoNegado");
+		if(perfil == Perfil.PADRAO) {
+			response.sendRedirect("../acessoNegado");
 			return false;
 		}
 		

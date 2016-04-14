@@ -22,8 +22,8 @@ public class CupomController {
 		this.dao = dao;
 	}
 	
-	@RequestMapping("/cadastroCupons")
-	public String metodo() {
+	@RequestMapping("/admin/cadastroCupons")
+	public String cadastroCupons() {
 		return "cadastro_cupons";
 	}
 	

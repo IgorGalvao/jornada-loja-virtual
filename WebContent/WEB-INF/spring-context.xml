@@ -5,13 +5,13 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
-						http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+						http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 						http://www.springframework.org/schema/beans 
-						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+						http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 						http://www.springframework.org/schema/context 
-						http://www.springframework.org/schema/context/spring-context-3.0.xsd
+						http://www.springframework.org/schema/context/spring-context-3.2.xsd
 						http://www.springframework.org/schema/tx
-						http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+						http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 						
 	<context:component-scan base-package="br.com.caelum.jornada" />
 	<mvc:annotation-driven />
@@ -42,8 +42,17 @@
 	<tx:annotation-driven />
 	
 	<mvc:interceptors>
-		<bean class="br.com.caelum.jornada.interceptor.AutorizadorInterceptor" />
-		<bean class="br.com.caelum.jornada.interceptor.AdministradorInterceptor" />
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/efetuaLogin" />
+			<mvc:exclude-mapping path="/login" />
+			<mvc:exclude-mapping path="/resources/**" />
+			<bean class="br.com.caelum.jornada.interceptor.AutorizadorInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**" />
+			<bean class="br.com.caelum.jornada.interceptor.AdministradorInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
 
 </beans>

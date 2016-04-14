@@ -23,9 +23,9 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
 							aria-haspopup="true" aria-expanded="false">Administrador<span class="caret"></span></a>
 	  				<ul class="dropdown-menu">
-						<li><a href="<c:url value="/cadastroLivros"/>">Cadastrar livros</a>
-						<li><a href="<c:url value="/cadastroUsuarios"/>">Cadastrar usuários</a>
-						<li><a href="<c:url value="/cadastroCupons"/>">Cadastrar cupons de desconto</a>
+						<li><a href="<c:url value="/admin/cadastroLivros"/>">Cadastrar livros</a>
+						<li><a href="<c:url value="/admin/cadastroUsuarios"/>">Cadastrar usuários</a>
+						<li><a href="<c:url value="/admin/cadastroCupons"/>">Cadastrar cupons de desconto</a>
 					</ul>
 				<li><p class="navbar-text">Logado como</p>
 				<li class="active"><a href="logout">Logout<span class="sr-only">(current)</span></a>

@@ -22,7 +22,7 @@ public class LivroController {
 		this.dao = dao;
 	}
 	
-	@RequestMapping("/cadastroLivros")
+	@RequestMapping("/admin/cadastroLivros")
 	public String metodo() {
 		return "cadastro_livros";
 	}
