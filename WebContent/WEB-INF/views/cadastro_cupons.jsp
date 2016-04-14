@@ -11,7 +11,9 @@
 	<link rel="stylesheet" href="resources/css/estilo.css">
 </head>
 <body>
-	
+	<header>
+		<%@ include file="menu/menu.jsp" %>
+	</header>
 	<div class="container">
 		<h2><c:out value="${empty cupom.id ? 'Cadastrar novo cupom' : 'Alterar dados cadastrados'}" /></h2>
 			<form action="<c:out value="${empty cupom.id ? 'cadastraCupom' : 'concluirAlteracaoCupom'}" />" method="post">
@@ -29,5 +31,8 @@
 			<input type="submit" value="<c:out value="${empty cupom.id ? 'Cadastrar' : 'Concluir Alteração'}" />" class="btn">
 		</form>
 	</div>
+	
+	<script src="resources/js/jquery-1.11.3.min.js"></script>
+	<script src="resources/js/bootstrap.js"></script>
 </body>
 </html>

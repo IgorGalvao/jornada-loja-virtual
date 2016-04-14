@@ -10,7 +10,9 @@
 	<link rel="stylesheet" href="resources/css/estilo.css">
 </head>
 <body>
-	
+	<header>
+		<%@ include file="menu/menu.jsp" %>
+	</header>
 	<div class="container">
 		<h2><c:out value="${empty livro.id ? 'Cadastrar novo livro' : 'Alterar dados cadastrados'}" /></h2>
 			<form action="<c:out value="${empty livro.id ? 'cadastraLivro' : 'concluirAlteracaoLivro'}" />" method="post">
@@ -46,5 +48,7 @@
 			<input type="submit" value="<c:out value="${empty livro.id ? 'Cadastrar' : 'Concluir Alteração'}" />" class="btn">
 		</form>
 	</div>
+	<script src="resources/js/jquery-1.11.3.min.js"></script>
+	<script src="resources/js/bootstrap.js"></script>
 </body>
 </html>

@@ -28,7 +28,7 @@ public class LoginController {
 	public String efetuaLogin(Usuario usuario, HttpSession session) {
 		if(dao.existeUsuario(usuario)) {
 			session.setAttribute("usuarioLogado", usuario);
-			return "cadastro_livros";
+			return "redirect:listaLivros";
 		}
 		return "redirect:login";
 	}

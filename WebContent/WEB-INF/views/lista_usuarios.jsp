@@ -11,6 +11,11 @@
 	<link rel="stylesheet" href="resources/css/estilo.css">
 </head>
 <body>
+
+	<header>
+		<%@ include file="menu/menu.jsp" %>
+	</header>
+	
 	<div class="container">
 		<h2>Usuários cadastrados</h2>
 		<table class="table">
@@ -35,8 +40,8 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		
-		<h4><a href="<c:url value="/cadastroUsuarios"/>">Cadastra novo usuario</a></h4>
 	</div>
+	<script src="resources/js/jquery-1.11.3.min.js"></script>
+	<script src="resources/js/bootstrap.js"></script>
 </body>
 </html>
