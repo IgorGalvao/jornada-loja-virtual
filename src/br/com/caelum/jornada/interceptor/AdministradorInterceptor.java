@@ -29,7 +29,7 @@ public class AdministradorInterceptor extends HandlerInterceptorAdapter {
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
 		Perfil perfil = dao.buscaPerfil(usuario);
 		
-		if(uri.endsWith("/cadastroCupons") && perfil == Perfil.Padrão) {
+		if(uri.contains("/cadastr") && perfil == Perfil.Padrão) {
 			response.sendRedirect("acessoNegado");
 			return false;
 		}
