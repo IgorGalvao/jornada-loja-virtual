@@ -24,13 +24,13 @@ public class LivroController {
 	
 	@RequestMapping("/admin/cadastroLivros")
 	public String metodo() {
-		return "cadastro_livros";
+		return "admin/cadastro_livros";
 	}
 	
-	@RequestMapping("/cadastraLivro")
+	@RequestMapping("/admin/cadastraLivro")
 	public String cadastraLivro(Livro livro) {
 		dao.cadastra(livro);
-		return "redirect:listaLivros";
+		return "redirect:/listaLivros";
 	}
 	
 	@RequestMapping("/listaLivros")
@@ -41,25 +41,25 @@ public class LivroController {
 		return mv;
 	}
 
-	@RequestMapping("/alteraLivro")
+	@RequestMapping("/admin/alteraLivro")
 	public ModelAndView preparaAlteracao(Integer id) {
 		Livro livro = dao.buscaPorId(id);
-		ModelAndView mv = new ModelAndView("cadastro_livros");
+		ModelAndView mv = new ModelAndView("admin/edicao_livro");
 		mv.addObject("livro", livro);
 		return mv;
 	}
 	
-	@RequestMapping("/concluirAlteracaoLivro")
+	@RequestMapping("/admin/concluirAlteracaoLivro")
 	public String alterar(Livro livro) {
 		dao.atualiza(livro);
-		return "redirect:listaLivros";
+		return "redirect:/listaLivros";
 	}
 	
-	@RequestMapping("/removeLivro")
+	@RequestMapping("/admin/removeLivro")
 	public String removeLivro(Integer id) {
 		Livro livro = dao.buscaPorId(id);
 		dao.remove(livro);
-		return "redirect:listaLivros";
+		return "redirect:/listaLivros";
 	}
 
 }

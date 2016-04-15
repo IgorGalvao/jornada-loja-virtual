@@ -7,12 +7,12 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Cadastro de Livros</title>
-	<link rel="stylesheet" href="resources/css/bootstrap.css">
-	<link rel="stylesheet" href="resources/css/estilo.css">
+	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>">
+	<link rel="stylesheet" href="<c:url value='/resources/css/estilo.css'/>">
 </head>
 <body>
 	<header>
-		<%@ include file="menu/menu.jsp" %>
+		<c:import url="/WEB-INF/views/menu/menu.jsp"/>
 	</header>
 	<div class="container">
 		<h2>Livros cadastrados</h2>
@@ -39,13 +39,13 @@
 						<td><fmt:formatNumber type="currency" value="${livro.precoLivro}"/>
 						<td><fmt:formatNumber type="currency" value="${livro.precoEbook}"/>
 						<td><fmt:formatNumber type="currency" value="${livro.precoCombo}"/>
-						<td><a href="alteraLivro?id=${livro.id}">Altera</a>
-						<td><a href="removeLivro?id=${livro.id}">Remove</a>
+						<td><a href="admin/alteraLivro?id=${livro.id}">Altera</a>
+						<td><a href="admin/removeLivro?id=${livro.id}">Remove</a>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
-	<script src="resources/js/jquery-1.11.3.min.js"></script>
-	<script src="resources/js/bootstrap.js"></script>
+	<script src="<c:url value='/resources/js/jquery-1.11.3.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>
 </body>
 </html>

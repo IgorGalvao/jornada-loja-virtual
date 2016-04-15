@@ -7,15 +7,13 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Cadastro de Usuários</title>
-	<link rel="stylesheet" href="resources/css/bootstrap.css">
-	<link rel="stylesheet" href="resources/css/estilo.css">
+	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>">
+	<link rel="stylesheet" href="<c:url value='/resources/css/estilo.css'/>">
 </head>
 <body>
-
 	<header>
-		<%@ include file="menu/menu.jsp" %>
+		<c:import url="/WEB-INF/views/menu/menu.jsp"/>
 	</header>
-	
 	<div class="container">
 		<h2>Usuários cadastrados</h2>
 		<table class="table">
@@ -35,13 +33,13 @@
 						<td>${usuario.senha}
 						<td>${usuario.email}
 						<td>${usuario.perfil}
-						<td><a href="alteraUsuario?id=${usuario.id}">Altera</a>
-						<td><a href="removeUsuario?id=${usuario.id}">Remove</a>
+						<td><a href="admin/alteraUsuario?id=${usuario.id}">Altera</a>
+						<td><a href="admin/removeUsuario?id=${usuario.id}">Remove</a>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
-	<script src="resources/js/jquery-1.11.3.min.js"></script>
-	<script src="resources/js/bootstrap.js"></script>
+	<script src="<c:url value='/resources/js/jquery-1.11.3.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>
 </body>
 </html>

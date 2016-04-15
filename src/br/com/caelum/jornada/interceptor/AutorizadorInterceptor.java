@@ -15,7 +15,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 			return true;
 		}
 		
-		response.sendRedirect("login");
+		response.sendRedirect(request.getContextPath()+"/login");
 		return false;
 	}
 }

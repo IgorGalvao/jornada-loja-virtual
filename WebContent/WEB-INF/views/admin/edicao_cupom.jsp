@@ -7,16 +7,16 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Cadastro de Cupons de Desconto</title>
-	<link rel="stylesheet" href="resources/css/bootstrap.css">
-	<link rel="stylesheet" href="resources/css/estilo.css">
+	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>">
+	<link rel="stylesheet" href="<c:url value='/resources/css/estilo.css'/>">
 </head>
 <body>
 	<header>
-		<%@ include file="menu/menu.jsp" %>
+		<c:import url="/WEB-INF/views/menu/menu.jsp"/>
 	</header>
 	<div class="container">
-		<h2><c:out value="${empty cupom.id ? 'Cadastrar novo cupom' : 'Alterar dados cadastrados'}" /></h2>
-			<form action="<c:out value="${empty cupom.id ? 'cadastraCupom' : 'concluirAlteracaoCupom'}" />" method="post">
+		<h2>Alterar dados cadastrados</h2>
+			<form action="<c:url value="/admin/concluirAlteracaoCupom"/>" method="post">
 			<input type="hidden" id="id" name="id" value="${cupom.id}">
 			<div class="form-group">
 				<label for="titulo">Validade</label>
@@ -32,7 +32,7 @@
 		</form>
 	</div>
 	
-	<script src="resources/js/jquery-1.11.3.min.js"></script>
-	<script src="resources/js/bootstrap.js"></script>
+	<script src="<c:url value='/resources/js/jquery-1.11.3.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>
 </body>
 </html>

@@ -15,26 +15,21 @@
 		<c:import url="/WEB-INF/views/menu/menu.jsp"/>
 	</header>
 	<div class="container">
-		<h2>Cupons cadastrados</h2>
-		<table class="table">
-			<thead>
-				<tr><th>Id
-					<th>Validade
-					<th>Porcentagem de Desconto
-					<th>Alterar
-					<th>Remover
-			</thead>
-			<tbody>
-				<c:forEach items="${cupons}" var="cupom">
-					<tr><td>${cupom.id}
-						<td><fmt:formatDate value="${cupom.validade.time}" pattern="dd/MM/yyyy" />
-						<td><fmt:formatNumber type="percent" maxIntegerDigits="2" value="${cupom.desconto}" />
-						<td><a href="admin/alteraCupom?id=${cupom.id}">Altera</a>
-						<td><a href="admin/removeCupom?id=${cupom.id}">Remove</a>
-				</c:forEach>
-			</tbody>
-		</table>
+		<h2>Cadastrar novo cupom</h2>
+			<form action="<c:url value='/admin/cadastraCupom'/>" method="post">
+			<input type="hidden" id="id" name="id">
+			<div class="form-group">
+				<label for="titulo">Validade</label>
+				<input type="text" id="validade" name="validade" class="form-control" autofocus>
+			</div>
+			<div class="form-group">
+				<label for="capa">Porcentagem de Desconto</label>
+				<input type="text" id="desconto" name="desconto" class="form-control">
+			</div>
+			<input type="submit" value="Cadastrar" class="btn">
+		</form>
 	</div>
+	
 	<script src="<c:url value='/resources/js/jquery-1.11.3.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>
 </body>

@@ -6,16 +6,16 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Cadastro de Usuários</title>
-	<link rel="stylesheet" href="resources/css/bootstrap.css">
-	<link rel="stylesheet" href="resources/css/estilo.css">
+	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>">
+	<link rel="stylesheet" href="<c:url value='/resources/css/estilo.css'/>">
 </head>
 <body>
 	<header>
-		<%@ include file="menu/menu.jsp" %>
+		<c:import url="/WEB-INF/views/menu/menu.jsp"/>
 	</header>
 	<div class="container">
-		<h2><c:out value="${empty usuario.id ? 'Cadastrar novo usuário' : 'Alterar dados cadastrados'}" /></h2>
-			<form action="<c:out value="${empty usuario.id ? 'cadastraUsuario' : 'concluirAlteracaoUsuario'}" />" method="post">
+		<h2>Alterar dados cadastrados</h2>
+			<form action="<c:url value="/admin/concluirAlteracaoUsuario"/>" method="post">
 			<input type="hidden" id="id" name="id" value="${usuario.id}">
 			<div class="form-group">
 				<label for="login">Login</label>
@@ -32,18 +32,18 @@
 			<div class="form-group">
 				<label for="perfil">Perfil</label>
 				<div class="radio">
-					<label><input type="radio" name="perfil" id="perfilPadrao" value="Padrão"
-							<c:if test="${usuario.perfil == 'Padrão'}">checked</c:if>>Padrão</label>
+					<label><input type="radio" name="perfil" id="perfilPadrao" value="PADRAO"
+							<c:if test="${usuario.perfil == 'PADRAO'}">checked</c:if>>Padrão</label>
 				</div>
 				<div class="radio">
-					<label><input type="radio" name="perfil" id="perfilAdministrador" value="Administrador"
-							<c:if test="${usuario.perfil == 'Administrador'}">checked</c:if>>Administrador</label>
+					<label><input type="radio" name="perfil" id="perfilAdministrador" value="ADMINISTRADOR"
+							<c:if test="${usuario.perfil == 'ADMINISTRADOR'}">checked</c:if>>Administrador</label>
 				</div>
 			</div>
-			<input type="submit" value="<c:out value="${empty usuario.id ? 'Cadastrar' : 'Concluir Alteração'}" />" class="btn">
+			<input type="submit" value="Concluir Alteração" class="btn">
 		</form>
 	</div>
-	<script src="resources/js/jquery-1.11.3.min.js"></script>
-	<script src="resources/js/bootstrap.js"></script>
+	<script src="<c:url value='/resources/js/jquery-1.11.3.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>
 </body>
 </html>

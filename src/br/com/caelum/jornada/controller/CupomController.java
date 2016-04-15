@@ -24,13 +24,13 @@ public class CupomController {
 	
 	@RequestMapping("/admin/cadastroCupons")
 	public String cadastroCupons() {
-		return "cadastro_cupons";
+		return "admin/cadastro_cupons";
 	}
 	
-	@RequestMapping("/cadastraCupom")
+	@RequestMapping("/admin/cadastraCupom")
 	public String cadastraCupom(Cupom cupom) {
 		dao.cadastra(cupom);
-		return "redirect:listaCupons";
+		return "redirect:/listaCupons";
 	}
 	
 	@RequestMapping("/listaCupons")
@@ -41,25 +41,25 @@ public class CupomController {
 		return mv;
 	}
 
-	@RequestMapping("/alteraCupom")
+	@RequestMapping("/admin/alteraCupom")
 	public ModelAndView preparaAlteracao(Integer id) {
 		Cupom cupom = dao.buscaPorId(id);
-		ModelAndView mv = new ModelAndView("cadastro_cupons");
+		ModelAndView mv = new ModelAndView("admin/edicao_cupom");
 		mv.addObject("cupom", cupom);
 		return mv;
 	}
 	
-	@RequestMapping("/concluirAlteracaoCupom")
+	@RequestMapping("/admin/concluirAlteracaoCupom")
 	public String alterar(Cupom cupom) {
 		dao.atualiza(cupom);
-		return "redirect:listaCupons";
+		return "redirect:/listaCupons";
 	}
 	
-	@RequestMapping("/removeCupom")
+	@RequestMapping("admin/removeCupom")
 	public String removeCupom(Integer id) {
 		Cupom cupom = dao.buscaPorId(id);
 		dao.remove(cupom);
-		return "redirect:listaCupons";
+		return "redirect:/listaCupons";
 	}
 
 }

@@ -24,13 +24,13 @@ public class UsuarioController {
 	
 	@RequestMapping("/admin/cadastroUsuarios")
 	public String cadastroUsuarios() {
-		return "cadastro_usuarios";
+		return "admin/cadastro_usuarios";
 	}
 	
-	@RequestMapping("/cadastraUsuario")
+	@RequestMapping("/admin/cadastraUsuario")
 	public String cadastraUsuario(Usuario usuario) {
 		dao.cadastra(usuario);
-		return "redirect:listaUsuarios";
+		return "redirect:/listaUsuarios";
 	}
 	
 	@RequestMapping("/listaUsuarios")
@@ -41,25 +41,25 @@ public class UsuarioController {
 		return mv;
 	}
 
-	@RequestMapping("/alteraUsuario")
+	@RequestMapping("/admin/alteraUsuario")
 	public ModelAndView preparaAlteracao(Integer id) {
 		Usuario usuario = dao.buscaPorId(id);
-		ModelAndView mv = new ModelAndView("cadastro_usuarios");
+		ModelAndView mv = new ModelAndView("admin/edicao_usuario");
 		mv.addObject("usuario", usuario);
 		return mv;
 	}
 	
-	@RequestMapping("/concluirAlteracaoUsuario")
+	@RequestMapping("/admin/concluirAlteracaoUsuario")
 	public String alterar(Usuario usuario) {
 		dao.atualiza(usuario);
-		return "redirect:listaUsuarios";
+		return "redirect:/listaUsuarios";
 	}
 	
-	@RequestMapping("/removeUsuario")
+	@RequestMapping("/admin/removeUsuario")
 	public String removeUsuario(Integer id) {
 		Usuario usuario = dao.buscaPorId(id);
 		dao.remove(usuario);
-		return "redirect:listaUsuarios";
+		return "redirect:/listaUsuarios";
 	}
 
 }
