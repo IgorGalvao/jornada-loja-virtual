@@ -1,5 +1,6 @@
 package br.com.caelum.jornada.modelo;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ public class Cupom {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Calendar validade;
 	@NumberFormat(style = NumberFormat.Style.PERCENT)
-	private double desconto;
+	private BigDecimal desconto;
 	
 	
 	public Integer getId() {
@@ -35,10 +36,10 @@ public class Cupom {
 	public void setValidade(Calendar validade) {
 		this.validade = validade;
 	}
-	public double getDesconto() {
+	public BigDecimal getDesconto() {
 		return desconto;
 	}
-	public void setDesconto(double desconto) {
+	public void setDesconto(BigDecimal desconto) {
 		this.desconto = desconto;
 	}
 	

@@ -1,5 +1,7 @@
 package br.com.caelum.jornada.modelo;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,9 +15,9 @@ public class Livro {
 	private String capa;
 	private String autor;
 	private String descricao;
-	private double precoLivro;
-	private double precoEbook;
-	private double precoCombo;
+	private BigDecimal precoLivro;
+	private BigDecimal precoEbook;
+	private BigDecimal precoCombo;
 	
 	
 	public Integer getId() {
@@ -48,22 +50,22 @@ public class Livro {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public double getPrecoLivro() {
+	public BigDecimal getPrecoLivro() {
 		return precoLivro;
 	}
-	public void setPrecoLivro(double precoLivro) {
+	public void setPrecoLivro(BigDecimal precoLivro) {
 		this.precoLivro = precoLivro;
 	}
-	public double getPrecoEbook() {
+	public BigDecimal getPrecoEbook() {
 		return precoEbook;
 	}
-	public void setPrecoEbook(double precoEbook) {
+	public void setPrecoEbook(BigDecimal precoEbook) {
 		this.precoEbook = precoEbook;
 	}
-	public double getPrecoCombo() {
+	public BigDecimal getPrecoCombo() {
 		return precoCombo;
 	}
-	public void setPrecoCombo(double precoCombo) {
+	public void setPrecoCombo(BigDecimal precoCombo) {
 		this.precoCombo = precoCombo;
 	}
 }
