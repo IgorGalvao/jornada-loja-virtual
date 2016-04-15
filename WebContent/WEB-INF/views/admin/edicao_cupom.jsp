@@ -19,12 +19,12 @@
 			<form action="<c:url value="/admin/concluirAlteracaoCupom"/>" method="post">
 			<input type="hidden" id="id" name="id" value="${cupom.id}">
 			<div class="form-group">
-				<label for="titulo">Validade</label>
+				<label for="validade">Validade</label>
 				<input type="text" id="validade" name="validade" class="form-control" autofocus
 						value="<fmt:formatDate value="${cupom.validade.time}" pattern="dd/MM/yyyy" />">
 			</div>
 			<div class="form-group">
-				<label for="capa">Porcentagem de Desconto</label>
+				<label for="desconto">Porcentagem de Desconto</label>
 				<input type="text" id="desconto" name="desconto" class="form-control"
 						value="<fmt:formatNumber type="percent" maxIntegerDigits="2" value="${cupom.desconto}" />">
 			</div>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="custom" %>
 
 <html>
 <head>
@@ -15,33 +16,27 @@
 	</header>
 	<div class="container">
 		<h2>Cadastrar novo usuário</h2>
-			<form action="<c:url value='/admin/cadastraUsuario'/>" method="post">
-			<input type="hidden" id="id" name="id">
-			<div class="form-group">
-				<label for="login">Login</label>
-				<input type="text" id="login" name="login" class="form-control" autofocus>
-			</div>
-			<div class="form-group">
-				<label for="senha">Senha</label>
-				<input type="password" id="senha" name="senha" class="form-control">
-			</div>
-			<div class="form-group">
-				<label for="email">Email</label>
-				<input type="email" id="email" name="email" class="form-control">
-			</div>
+		<form action="<c:url value='/admin/cadastraUsuario'/>" method="post">
+
+			<custom:inputLabel type="text" text="Login" id="login" />
+			
+			<custom:inputLabel type="password" text="Senha" id="senha" />
+			
+			<custom:inputLabel type="email" text="Email" id="email" />
+			
 			<div class="form-group">
 				<label for="perfil">Perfil</label>
-				<div class="radio">
-					<label><input type="radio" name="perfil" id="perfilPadrao" value="PADRAO">Padrão</label>
-				</div>
-				<div class="radio">
-					<label><input type="radio" name="perfil" id="perfilAdministrador" value="ADMINISTRADOR">Administrador</label>
-				</div>
+				<custom:radioLabel name="perfil" value="PADRAO" text="Padrão" id="perfilPadrao" />
+				<custom:radioLabel name="perfil" value="ADMINISTRADOR" text="Administrador" id="perfilAdministrador" />
 			</div>
+
 			<input type="submit" value="Cadastrar" class="btn">
+
 		</form>
 	</div>
+
 	<script src="<c:url value='/resources/js/jquery-1.11.3.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>
+
 </body>
 </html>
