@@ -19,8 +19,9 @@ public class Livro {
 	private String capa;
 	@Column(nullable=false)
 	private String autor;
-	@Column(nullable=false)
+	@Column(nullable=false, length=300)
 	private String descricao;
+//	private Categoria categoria;
 	@ElementCollection(fetch=FetchType.EAGER)
 	private List<Preco> precos;
 	

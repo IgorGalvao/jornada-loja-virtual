@@ -53,9 +53,14 @@ public class LivroController {
 
 	@RequestMapping("/admin/alteraLivro")
 	public ModelAndView preparaAlteracao(Integer id) {
-		Livro livro = dao.buscaPorId(id);
 		ModelAndView mv = new ModelAndView("admin/edicao_livro");
+
+		Livro livro = dao.buscaPorId(id);
 		mv.addObject("livro", livro);
+		
+		List<TipoLivro> tiposLivros = Arrays.asList(TipoLivro.values());
+		mv.addObject("tiposLivros", tiposLivros);
+		
 		return mv;
 	}
 	
