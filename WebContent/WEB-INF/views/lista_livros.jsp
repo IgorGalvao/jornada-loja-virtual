@@ -23,9 +23,9 @@
 					<th>Autor
 					<th>Capa
 					<th>Descrição
-					<th>Preço (livro)
-					<th>Preço (ebook)
-					<th>Preço (combo)
+					<c:forEach items="${tiposLivros}" var="tipo">
+					    <th>Preço ${tipo.label}
+					</c:forEach>
 					<th>Alterar
 					<th>Remover
 			</thead>
@@ -36,9 +36,9 @@
 						<td>${livro.autor}
 						<td>${livro.capa}
 						<td>${livro.descricao}
-						<td><fmt:formatNumber type="currency" value="${livro.precoLivro}"/>
-						<td><fmt:formatNumber type="currency" value="${livro.precoEbook}"/>
-						<td><fmt:formatNumber type="currency" value="${livro.precoCombo}"/>
+						<c:forEach items="${livro.precos}" var="preco">
+						    <td>${preco.valor}</td>
+						</c:forEach>
 						<td><a href="admin/alteraLivro?id=${livro.id}">Altera</a>
 						<td><a href="admin/removeLivro?id=${livro.id}">Remove</a>
 				</c:forEach>

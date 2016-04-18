@@ -1,5 +1,6 @@
 package br.com.caelum.jornada.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caelum.jornada.dao.LivroDAO;
 import br.com.caelum.jornada.modelo.Livro;
+import br.com.caelum.jornada.modelo.TipoLivro;
 
 @Transactional
 @Controller
@@ -23,8 +25,11 @@ public class LivroController {
 	}
 	
 	@RequestMapping("/admin/cadastroLivros")
-	public String metodo() {
-		return "admin/cadastro_livros";
+	public ModelAndView cadastroLivros() {
+		List<TipoLivro> tiposLivros = Arrays.asList(TipoLivro.values());
+		ModelAndView mv = new ModelAndView("admin/cadastro_livros");
+		mv.addObject("tiposLivros", tiposLivros);
+		return mv;
 	}
 	
 	@RequestMapping("/admin/cadastraLivro")
@@ -35,9 +40,14 @@ public class LivroController {
 	
 	@RequestMapping("/listaLivros")
 	public ModelAndView listaLivros() {
-		List<Livro> lista = dao.listaTodos();
 		ModelAndView mv = new ModelAndView("lista_livros");
+
+		List<Livro> lista = dao.listaTodos();
 		mv.addObject("livros", lista);
+
+		List<TipoLivro> tiposLivros = Arrays.asList(TipoLivro.values());
+		mv.addObject("tiposLivros", tiposLivros);
+
 		return mv;
 	}
 

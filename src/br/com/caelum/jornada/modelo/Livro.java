@@ -1,8 +1,11 @@
 package br.com.caelum.jornada.modelo;
 
-import java.math.BigDecimal;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -11,13 +14,15 @@ public class Livro {
 
 	@Id @GeneratedValue
 	private Integer id;
+	@Column(nullable=false)
 	private String titulo;
 	private String capa;
+	@Column(nullable=false)
 	private String autor;
+	@Column(nullable=false)
 	private String descricao;
-	private BigDecimal precoLivro;
-	private BigDecimal precoEbook;
-	private BigDecimal precoCombo;
+	@ElementCollection(fetch=FetchType.EAGER)
+	private List<Preco> precos;
 	
 	
 	public Integer getId() {
@@ -50,22 +55,11 @@ public class Livro {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public BigDecimal getPrecoLivro() {
-		return precoLivro;
+	public List<Preco> getPrecos() {
+		return precos;
 	}
-	public void setPrecoLivro(BigDecimal precoLivro) {
-		this.precoLivro = precoLivro;
+	public void setPrecos(List<Preco> precos) {
+		this.precos = precos;
 	}
-	public BigDecimal getPrecoEbook() {
-		return precoEbook;
-	}
-	public void setPrecoEbook(BigDecimal precoEbook) {
-		this.precoEbook = precoEbook;
-	}
-	public BigDecimal getPrecoCombo() {
-		return precoCombo;
-	}
-	public void setPrecoCombo(BigDecimal precoCombo) {
-		this.precoCombo = precoCombo;
-	}
-}
+
+}	

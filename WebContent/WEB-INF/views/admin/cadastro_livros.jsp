@@ -31,11 +31,13 @@
 				<textarea rows="3" cols="100" name="descricao" class="form-control"></textarea>
 			</div>
 
-			<custom:inputLabel type="text" id="precoLivro" text="Preço (livro impresso)" />
-
-			<custom:inputLabel type="text" id="precoEbook" text="Preço (ebook)" />
-
-			<custom:inputLabel type="text" id="precoCombo" text="Preço (combo)" />
+			<c:forEach items="${tiposLivros}" var="tipoLivro" varStatus="contador">
+			    <div class="form-group">
+			        <label for="preco_${tipoLivro}">Preço ${tipoLivro.label}</label>
+			        <input type="text" name="precos[${contador.index}].valor" id="preco${tipoLivro}" class="form-control"/>
+			        <input type="hidden" name="precos[${contador.index}].tipoLivro" value="${tipoLivro}"/>
+			    </div>
+			</c:forEach>
 
 			<input type="submit" value="Cadastrar" class="btn">
 

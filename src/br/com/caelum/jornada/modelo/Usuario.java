@@ -14,10 +14,11 @@ public class Usuario {
 	private Integer id;
 	@Column(unique=true, nullable=false, updatable=false)
 	private String login;
+	@Column(nullable=false, updatable=true)
 	private String senha;
 	@Column(unique=true, nullable=false)
 	private String email;
-	@Enumerated(EnumType.STRING)
+	@Column(nullable=false) @Enumerated(EnumType.STRING)
 	private Perfil perfil;
 	
 	
