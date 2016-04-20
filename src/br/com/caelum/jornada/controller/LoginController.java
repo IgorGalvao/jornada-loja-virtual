@@ -27,7 +27,8 @@ public class LoginController {
 	@RequestMapping("/efetuaLogin")
 	public String efetuaLogin(Usuario usuario, HttpSession session) {
 		if(dao.existeUsuario(usuario)) {
-			session.setAttribute("usuarioLogado", usuario);
+			Usuario usuarioSalvo = dao.buscaPorLogin(usuario.getLogin());
+			session.setAttribute("usuarioLogado", usuarioSalvo);
 			return "redirect:listaLivros";
 		}
 		return "redirect:login";

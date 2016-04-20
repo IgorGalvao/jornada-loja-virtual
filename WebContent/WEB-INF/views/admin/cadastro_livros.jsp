@@ -27,6 +27,16 @@
 			<custom:inputLabel type="text" id="autor" text="Autor" />
 
 			<div class="form-group">
+				<label for="categoria">Categoria</label>
+				<select class="form-control" name="categoria">
+<!-- 					<option></option> -->
+					<c:forEach items="${categorias}" var="categoria">
+						<option value="${categoria.id}">${categoria.nome}</option>
+					</c:forEach>
+				</select>
+			</div>
+
+			<div class="form-group">
 				<label for="descricao">Descrição</label>
 				<textarea rows="3" cols="100" name="descricao" class="form-control"></textarea>
 			</div>

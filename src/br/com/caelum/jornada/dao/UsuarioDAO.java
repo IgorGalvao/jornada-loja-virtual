@@ -34,13 +34,6 @@ public class UsuarioDAO {
 	public Usuario buscaPorId(Integer id) {
 		return manager.find(Usuario.class, id);
 	}
-	
-	public Perfil buscaPerfil(Usuario usuario) {
-		Query query = manager.createQuery("select u from Usuario u where u.login = :login");
-		query.setParameter("login", usuario.getLogin());
-		Usuario retorno = (Usuario) query.getSingleResult();
-		return retorno.getPerfil();
-	}
 
 	public List<Usuario> listaTodos() {
 		return manager.createQuery("select u from Usuario u").getResultList();
@@ -61,6 +54,12 @@ public class UsuarioDAO {
 			}
 		}
 		return false;
+	}
+
+	public Usuario buscaPorLogin(String login) {
+		Query query = manager.createQuery("select u from Usuario u where u.login = :login");
+		query.setParameter("login", login);
+		return (Usuario) query.getSingleResult();
 	}
 
 }

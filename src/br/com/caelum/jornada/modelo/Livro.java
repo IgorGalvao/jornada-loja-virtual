@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Livro {
@@ -21,7 +22,8 @@ public class Livro {
 	private String autor;
 	@Column(nullable=false, length=300)
 	private String descricao;
-//	private Categoria categoria;
+	@ManyToOne
+	private Categoria categoria;
 	@ElementCollection(fetch=FetchType.EAGER)
 	private List<Preco> precos;
 	
@@ -61,6 +63,12 @@ public class Livro {
 	}
 	public void setPrecos(List<Preco> precos) {
 		this.precos = precos;
+	}
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 }	

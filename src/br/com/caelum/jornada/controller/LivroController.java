@@ -3,13 +3,20 @@ package br.com.caelum.jornada.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.caelum.jornada.dao.CategoriaDAO;
 import br.com.caelum.jornada.dao.LivroDAO;
+import br.com.caelum.jornada.modelo.Categoria;
 import br.com.caelum.jornada.modelo.Livro;
 import br.com.caelum.jornada.modelo.TipoLivro;
 
@@ -18,17 +25,24 @@ import br.com.caelum.jornada.modelo.TipoLivro;
 public class LivroController {
 
 	private LivroDAO dao;
+	private CategoriaDAO categoriaDao;
 	
 	@Autowired
-	public LivroController(LivroDAO dao) {
+	public LivroController(LivroDAO dao, CategoriaDAO categoriaDao) {
 		this.dao = dao;
+		this.categoriaDao = categoriaDao;
 	}
 	
 	@RequestMapping("/admin/cadastroLivros")
-	public ModelAndView cadastroLivros() {
-		List<TipoLivro> tiposLivros = Arrays.asList(TipoLivro.values());
+	public ModelAndView cadastroLivros(@ModelAttribute("livro") @Valid Livro livro, BindingResult result, Model model) {
 		ModelAndView mv = new ModelAndView("admin/cadastro_livros");
+
+		List<TipoLivro> tiposLivros = Arrays.asList(TipoLivro.values());
 		mv.addObject("tiposLivros", tiposLivros);
+
+		List<Categoria> categorias = categoriaDao.listaTodos();
+		mv.addObject("categorias", categorias);
+		
 		return mv;
 	}
 	

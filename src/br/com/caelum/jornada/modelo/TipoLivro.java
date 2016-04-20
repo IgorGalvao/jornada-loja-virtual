@@ -2,9 +2,9 @@ package br.com.caelum.jornada.modelo;
 
 public enum TipoLivro {
 
-	LIVRO("(livro impresso)"),
+	LIVRO("(impresso)"),
 	EBOOK("(ebook)"),
-	COMBO("(combo livro impresso + ebook)");
+	COMBO("(combo)");
 
 	private final String label;	
 	

@@ -14,7 +14,7 @@
 						http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 						
 	<context:component-scan base-package="br.com.caelum.jornada" />
-	<mvc:annotation-driven />
+	<mvc:annotation-driven conversion-service="conversionService" />
 	<mvc:default-servlet-handler/>
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -54,5 +54,11 @@
 			<bean class="br.com.caelum.jornada.interceptor.AdministradorInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
+	
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="formatters">
+			<set><ref bean="categoriaFormatter"/></set>
+		</property>
+	</bean>
 
 </beans>

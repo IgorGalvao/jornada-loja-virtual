@@ -20,9 +20,9 @@
 			<div id="coltexto" class="col-md-5 col-sm-push-3">
 				<h2>${livro.titulo}</h2>
 				<p>por <span class="h4">${livro.autor}</span></h4>
-<%--	 		<p>${livro.categoria}</p> --%>
+	 			<p>${livro.categoria.nome}</p>
 				<div class="well well-sm">
-					<p>${livro.descricao}</p>
+					<blockquote><p>${livro.descricao}</p></blockquote>
 				</div>
 			</div>
 			<div id="colcapa" class="col-md-3 col-sm-pull-5">
