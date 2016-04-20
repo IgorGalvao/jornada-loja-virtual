@@ -1,0 +1,24 @@
+.container {
+	padding-top: 60px;
+}
+
+.capa {
+	max-height: 250px;
+}
+
+.thumbnail {
+	background-color: #F3F3F3;
+	min-height: 400px;
+}
+
+h2 {
+	margin-bottom: 30px;
+}
+
+#filtro {
+	margin-bottom: 25px;
+}
+
+.oculto {
+	display: none;
+}

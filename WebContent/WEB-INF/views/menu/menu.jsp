@@ -20,19 +20,17 @@
 				<li><a href="<c:url value='/listaUsuarios'/>">Usuários</a>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-			<c:choose>
-				<c:when test="${sessionScope.usuarioLogado.perfil == 'ADMINISTRADOR'}">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-								aria-haspopup="true" aria-expanded="false">Administrador<span class="caret"></span></a>
-		  				<ul class="dropdown-menu">
-							<li><a href="<c:url value='/admin/cadastroLivros'/>">Cadastrar livros</a>
-							<li><a href="<c:url value='/admin/cadastroCategorias'/>">Gerenciar categorias</a>
-							<li><a href="<c:url value='/admin/cadastroUsuarios'/>">Cadastrar usuários</a>
-							<li><a href="<c:url value='/admin/cadastroCupons'/>">Cadastrar cupons de desconto</a>
-						</ul>
-				</c:when>
-			</c:choose>
+			<c:choose><c:when test="${sessionScope.usuarioLogado.perfil == 'ADMINISTRADOR'}">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+							aria-haspopup="true" aria-expanded="false">Administrador<span class="caret"></span></a>
+	  				<ul class="dropdown-menu">
+						<li><a href="<c:url value='/admin/cadastroLivros'/>">Cadastrar livros</a>
+						<li><a href="<c:url value='/admin/cadastroCategorias'/>">Gerenciar categorias</a>
+						<li><a href="<c:url value='/admin/cadastroUsuarios'/>">Cadastrar usuários</a>
+						<li><a href="<c:url value='/admin/cadastroCupons'/>">Cadastrar cupons de desconto</a>
+					</ul>
+				</c:when></c:choose>
 				<li><p class="navbar-text">Logado como ${sessionScope.usuarioLogado.login}</p>
 				<li class="active"><a href="<c:url value='/logout'/>">Logout<span class="sr-only">(current)</span></a>
 			</ul>

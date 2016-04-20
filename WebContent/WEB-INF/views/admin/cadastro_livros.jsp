@@ -29,7 +29,6 @@
 			<div class="form-group">
 				<label for="categoria">Categoria</label>
 				<select class="form-control" name="categoria">
-<!-- 					<option></option> -->
 					<c:forEach items="${categorias}" var="categoria">
 						<option value="${categoria.id}">${categoria.nome}</option>
 					</c:forEach>

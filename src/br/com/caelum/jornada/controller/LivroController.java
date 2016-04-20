@@ -58,9 +58,9 @@ public class LivroController {
 
 		List<Livro> lista = dao.listaTodos();
 		mv.addObject("livros", lista);
-
-		List<TipoLivro> tiposLivros = Arrays.asList(TipoLivro.values());
-		mv.addObject("tiposLivros", tiposLivros);
+		
+		List<Categoria> categorias = categoriaDao.listaTodos();
+		mv.addObject("categorias", categorias);
 
 		return mv;
 	}
@@ -89,6 +89,19 @@ public class LivroController {
 		Livro livro = dao.buscaPorId(id);
 		dao.remove(livro);
 		return "redirect:/listaLivros";
+	}
+	
+	@RequestMapping("/mostraDetalhes")
+	public ModelAndView mostraDetalhes(Integer id) {
+		ModelAndView mv = new ModelAndView("detalhes_livro");
+
+		Livro livro = dao.buscaPorId(id);
+		mv.addObject("livro", livro);
+		
+		List<TipoLivro> tiposLivros = Arrays.asList(TipoLivro.values());
+		mv.addObject("tiposLivros", tiposLivros);
+		
+		return mv;
 	}
 
 }
