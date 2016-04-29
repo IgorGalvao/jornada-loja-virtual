@@ -31,7 +31,7 @@
 						<td>${compra.key.preco.tipoLivro}
 						<td>${compra.key.preco.valor}
 						<td>${compra.value}
-						<td><a href="removerDoCarrinho?livro=${compra.key.livro.id}&formato="${compra.key.preco.tipoLivro}">Remove</a>
+						<td><a href="removerDoCarrinho?livro=${compra.key.livro.id}&formato=${compra.key.preco.tipoLivro}">Remove</a>
 				</c:forEach>
 			</tbody>
 		</table>

@@ -41,8 +41,9 @@ public class CarrinhoController {
 	}
 	
 	@RequestMapping("/removerDoCarrinho")
-	public String removerDoCarrinho(Integer id, TipoLivro tipo) {
-		carrinho.remove(id, tipo);
+	public String removerDoCarrinho(@RequestParam("livro") String id, @RequestParam("formato") TipoLivro tipo) {
+		Livro livro = livroDao.buscaPorId(Integer.parseInt(id));
+		carrinho.remove(livro, tipo);
 		return "redirect:exibirCarrinho";
 	}
 
