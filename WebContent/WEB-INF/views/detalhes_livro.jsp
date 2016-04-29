@@ -34,12 +34,18 @@
 					<!-- Default panel contents -->
 					<div class="panel-heading">Escolha o formato</div>
 					<ul class="list-group">
-						<c:forEach items="${tiposLivros}" var="tipoLivro" varStatus="contador">
-						    <li class="list-group-item">
-						        <p>Preço ${tipoLivro.label}</p>
-						        <p><fmt:formatNumber type="currency">${livro.precos[contador.index].valor}</fmt:formatNumber></p>
-							</li>
-						</c:forEach>
+							<form action="adicionarAoCarrinho">
+							<input type="hidden" name="livro" value="${livro.id}">
+							<c:forEach items="${tiposLivros}" var="tipoLivro" varStatus="contador">
+								<li class="list-group-item"><div class="form-group"><div class="radio">
+									<label><input type="radio" name="preco" value="${contador.index}">
+										<p>Preço ${tipoLivro.label}</p>
+										<p><fmt:formatNumber type="currency">${livro.precos[contador.index].valor}</fmt:formatNumber></p>
+									</label>
+								</div></div></li>
+							</c:forEach>
+						<li class="list-group-item"><button class="btn btn-primary" type="submit">Comprar</button>
+						</form>
 					</ul>
 				</div>		
 			</div>
