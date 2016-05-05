@@ -11,6 +11,7 @@
 		<class>br.com.caelum.jornada.modelo.Usuario</class>
 		<class>br.com.caelum.jornada.modelo.Cupom</class>
 		<class>br.com.caelum.jornada.modelo.Categoria</class>
+		<class>br.com.caelum.jornada.modelo.Pedido</class>
 
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />

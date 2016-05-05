@@ -32,6 +32,7 @@
 					</ul>
 			</c:if>
 				<li><p class="navbar-text">Logado como ${usuarioLogado.login}</p>
+				<li><a href="<c:url value='/exibirCarrinho' />">Carrinho</a>
 				<li class="active"><a href="<c:url value='/logout'/>">Logout<span class="sr-only">(current)</span></a>
 			</ul>
 		</div><!-- /.navbar-collapse -->

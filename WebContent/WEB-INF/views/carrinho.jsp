@@ -17,6 +17,15 @@
 	<div class="container">
 		
 		<h2>Carrinho de Compras</h2>
+
+		<c:choose>
+		<c:when test="${carrinho.total == 0}">
+		
+		<div class="jumbotron"><h3>O carrinho de compras está vazio.</h3></div>
+		
+		</c:when>
+		<c:otherwise>
+		
 		<table class="table">
 			<thead>
 				<tr><th>Livro
@@ -30,11 +39,31 @@
 					<tr><td>${compra.key.livro.titulo} (${compra.key.livro.autor})
 						<td>${compra.key.preco.tipoLivro}
 						<td>${compra.key.preco.valor}
-						<td>${compra.value}
+						<td>
+							<a href="decrementaItem?livro=${compra.key.livro.id}&formato=${compra.key.preco.tipoLivro}">
+								<span class="glyphicon glyphicon-minus"></span>
+							</a>
+							${compra.value}
+							<a href="incrementaItem?livro=${compra.key.livro.id}&formato=${compra.key.preco.tipoLivro}">
+								<span class="glyphicon glyphicon-plus"></span>
+							</a>
+						</td>
 						<td><a href="removerDoCarrinho?livro=${compra.key.livro.id}&formato=${compra.key.preco.tipoLivro}">Remove</a>
 				</c:forEach>
 			</tbody>
+			<tfoot>
+				<tr><td>Total
+					<td>
+					<td>${carrinho.total}
+					<td>
+					<td>
+			</tfoot>
 		</table>
+		
+		<a class="btn btn-primary" href="fecharPedido" role="button">Fechar pedido</a>
+		
+		</c:otherwise>
+		</c:choose>
 		
 		
 	</div> <!-- .container -->
