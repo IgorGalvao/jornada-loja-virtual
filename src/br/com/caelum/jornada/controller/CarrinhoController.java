@@ -1,6 +1,8 @@
 package br.com.caelum.jornada.controller;
 
 import java.util.GregorianCalendar;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,7 +20,6 @@ import br.com.caelum.jornada.dao.CupomDAO;
 import br.com.caelum.jornada.dao.LivroDAO;
 import br.com.caelum.jornada.dao.PedidoDAO;
 import br.com.caelum.jornada.dao.UsuarioDAO;
-import br.com.caelum.jornada.modelo.Cupom;
 import br.com.caelum.jornada.modelo.Item;
 import br.com.caelum.jornada.modelo.Livro;
 import br.com.caelum.jornada.modelo.Pedido;
@@ -90,6 +91,13 @@ public class CarrinhoController {
 		pedido.setUsuario((Usuario)session.getAttribute("usuarioLogado"));
 		pedido.setCupom(cupomDao.buscaPorId(cupomId));
 		pedido.setValidadeCartao(new GregorianCalendar(ano, mes, 01));
+		pedido.setTotalCompra(carrinho.getTotal());
+		
+//		Map<Livro, Integer> livros = new LinkedHashMap<Livro, Integer>();
+//		for(Map.Entry<Item, Integer> entry : carrinho.getCompras().entrySet()) {
+//			livros.put(entry.getKey().getLivro(), entry.getValue());
+//		}
+//		pedido.setProdutos(livros);
 
 		pedidoDao.cadastra(pedido);
 		return mv;

@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Livro {
@@ -16,11 +18,15 @@ public class Livro {
 	@Id @GeneratedValue
 	private Integer id;
 	@Column(nullable=false)
+	@NotNull
 	private String titulo;
+	@NotNull
 	private String capa;
 	@Column(nullable=false)
+	@NotNull
 	private String autor;
-	@Column(nullable=false, length=300)
+	@Column(nullable=false, length=500)
+	@NotNull @Size(min=10, max=500, message="Descrição deve ter entre 10 e 500 caracteres")
 	private String descricao;
 	@ManyToOne
 	private Categoria categoria;

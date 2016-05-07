@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caelum.jornada.dao.CategoriaDAO;
 import br.com.caelum.jornada.dao.LivroDAO;
@@ -26,6 +26,8 @@ public class LivroController {
 
 	private LivroDAO dao;
 	private CategoriaDAO categoriaDao;
+	@Autowired
+	private Validator validator;
 	
 	@Autowired
 	public LivroController(LivroDAO dao, CategoriaDAO categoriaDao) {
@@ -34,48 +36,48 @@ public class LivroController {
 	}
 	
 	@RequestMapping("/admin/cadastroLivros")
-	public ModelAndView cadastroLivros(@ModelAttribute("livro") @Valid Livro livro, BindingResult result, Model model) {
-		ModelAndView mv = new ModelAndView("admin/cadastro_livros");
-
+	public String cadastroLivros(@ModelAttribute("livro") Livro livro, BindingResult result, Model model) {
 		List<TipoLivro> tiposLivros = Arrays.asList(TipoLivro.values());
-		mv.addObject("tiposLivros", tiposLivros);
+		model.addAttribute("tiposLivros", tiposLivros);
 
 		List<Categoria> categorias = categoriaDao.listaTodos();
-		mv.addObject("categorias", categorias);
-		
-		return mv;
+		model.addAttribute("categorias", categorias);
+
+		return "admin/cadastro_livros";
 	}
 	
 	@RequestMapping("/admin/cadastraLivro")
-	public String cadastraLivro(Livro livro) {
-		dao.cadastra(livro);
-		return "redirect:/listaLivros";
+	public String cadastraLivro(@Valid Livro livro, BindingResult result) {
+		if(!result.hasErrors()) {
+			dao.cadastra(livro);
+			return "redirect:/listaLivros";
+		} else {
+			return "forward:/admin/cadastroLivros";
+		}
 	}
 	
 	@RequestMapping("/listaLivros")
-	public ModelAndView listaLivros() {
-		ModelAndView mv = new ModelAndView("lista_livros");
+	public String listaLivros(Model model) {
 
 		List<Livro> lista = dao.listaTodos();
-		mv.addObject("livros", lista);
+		model.addAttribute("livros", lista);
 		
 		List<Categoria> categorias = categoriaDao.listaTodos();
-		mv.addObject("categorias", categorias);
+		model.addAttribute("categorias", categorias);
 
-		return mv;
+		return "lista_livros";
 	}
 
 	@RequestMapping("/admin/alteraLivro")
-	public ModelAndView preparaAlteracao(Integer id) {
-		ModelAndView mv = new ModelAndView("admin/edicao_livro");
+	public String preparaAlteracao(Integer id, Model model) {
 
 		Livro livro = dao.buscaPorId(id);
-		mv.addObject("livro", livro);
+		model.addAttribute("livro", livro);
 		
 		List<TipoLivro> tiposLivros = Arrays.asList(TipoLivro.values());
-		mv.addObject("tiposLivros", tiposLivros);
+		model.addAttribute("tiposLivros", tiposLivros);
 		
-		return mv;
+		return "admin/edicao_livro";
 	}
 	
 	@RequestMapping("/admin/concluirAlteracaoLivro")
@@ -92,16 +94,15 @@ public class LivroController {
 	}
 	
 	@RequestMapping("/mostraDetalhes")
-	public ModelAndView mostraDetalhes(Integer id) {
-		ModelAndView mv = new ModelAndView("detalhes_livro");
+	public String mostraDetalhes(Integer id, Model model) {
 
 		Livro livro = dao.buscaPorId(id);
-		mv.addObject("livro", livro);
+		model.addAttribute("livro", livro);
 		
 		List<TipoLivro> tiposLivros = Arrays.asList(TipoLivro.values());
-		mv.addObject("tiposLivros", tiposLivros);
+		model.addAttribute("tiposLivros", tiposLivros);
 		
-		return mv;
+		return "detalhes_livro";
 	}
 
 }

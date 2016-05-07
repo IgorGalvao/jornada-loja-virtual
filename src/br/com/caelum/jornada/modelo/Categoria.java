@@ -1,12 +1,13 @@
 package br.com.caelum.jornada.modelo;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-@Entity
+@Entity @Embeddable
 public class Categoria {
 	
 	@Id @GeneratedValue

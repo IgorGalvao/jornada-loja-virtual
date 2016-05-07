@@ -1,12 +1,15 @@
 package br.com.caelum.jornada.modelo;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.Map;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -35,8 +38,9 @@ public class Pedido {
 	@ManyToOne
 	private Cupom cupom;
 
-	//	@ElementCollection(fetch=FetchType.EAGER)
-//	private Map<Item, Integer> produtos;
+//	@ElementCollection(fetch=FetchType.EAGER)
+//	private Map<Livro, Integer> produtos;
+	private BigDecimal totalCompra;
 	
 	
 	public Integer getId() {
@@ -98,6 +102,12 @@ public class Pedido {
 	}
 	public void setCupom(Cupom cupom) {
 		this.cupom = cupom;
+	}
+	public BigDecimal getTotalCompra() {
+		return totalCompra;
+	}
+	public void setTotalCompra(BigDecimal totalCompra) {
+		this.totalCompra = totalCompra;
 	}
 
 	
