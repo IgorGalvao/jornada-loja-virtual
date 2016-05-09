@@ -14,7 +14,10 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-@Entity
+import br.com.caelum.jornada.validator.CategoriaSelecionada;
+import br.com.caelum.jornada.validator.PrecoPreenchido;
+
+@Entity @CategoriaSelecionada @PrecoPreenchido
 public class Livro {
 
 	@Id @GeneratedValue
@@ -28,7 +31,8 @@ public class Livro {
 	@NotBlank(message="Obrigatório informar o autor")
 	private String autor;
 	@Column(nullable=false, length=500)
-	@NotNull @Size(min=10, max=500, message="Descrição deve ter entre {min} e {max} caracteres")
+	@NotNull(message="Obrigatório preencher a descrição")
+	@Size(min=10, max=500, message="Descrição deve ter entre {min} e {max} caracteres")
 	private String descricao;
 	@ManyToOne
 	private Categoria categoria;

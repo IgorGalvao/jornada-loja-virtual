@@ -35,6 +35,7 @@
 				</div>
 				<div class="form-group col-sm-6">
 					<label for="categoria">Categoria</label>
+					<form:errors path="livro.categoria" cssClass="erro" />
 					<select class="form-control" name="categoria">
 							<option value="">Selecione uma categoria</option>
 						<c:forEach items="${categorias}" var="categoria">
@@ -54,6 +55,7 @@
 			<c:forEach items="${tiposLivros}" var="tipoLivro" varStatus="contador">
 			    <div class="form-group col-sm-4">
 			        <label for="preco_${tipoLivro}">Preço ${tipoLivro.label}</label>
+			        <form:errors path="livro.precos[${contador.index}]" cssClass="erro" />
 			        <input type="text" name="precos[${contador.index}].valor" id="preco${tipoLivro}" class="form-control"/>
 			        <input type="hidden" name="precos[${contador.index}].tipoLivro" value="${tipoLivro}"/>
 			    </div>

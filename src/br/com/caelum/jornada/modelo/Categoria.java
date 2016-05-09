@@ -1,14 +1,13 @@
 package br.com.caelum.jornada.modelo;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-@Entity @Embeddable
+@Entity
 public class Categoria {
 	
 	@Id @GeneratedValue
@@ -16,7 +15,6 @@ public class Categoria {
 	@NotBlank(message="Favor informar nome da categoria")
 	@Column(nullable=false)
 	private String nome;
-	
 	
 	public Integer getId() {
 		return id;
@@ -30,6 +28,5 @@ public class Categoria {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
 	
 }
