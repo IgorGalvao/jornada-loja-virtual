@@ -1,13 +1,16 @@
 package br.com.caelum.jornada.carrinho;
 
 import java.math.BigDecimal;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
+import br.com.caelum.jornada.modelo.Cupom;
 import br.com.caelum.jornada.modelo.Item;
 import br.com.caelum.jornada.modelo.Livro;
 import br.com.caelum.jornada.modelo.Preco;
@@ -17,19 +20,24 @@ import br.com.caelum.jornada.modelo.TipoLivro;
 @Scope(value=WebApplicationContext.SCOPE_SESSION)
 public class CarrinhoDeCompras {
 
-	private Map<Item, Integer> compras = new LinkedHashMap<Item, Integer>();
+	private List<Item> itens = new ArrayList<Item>();
 
-	public Map<Item, Integer> getCompras() {
-		return compras;
+	public List<Item> getItens() {
+		return itens;
 	}
 
 	public void adiciona(Item item) {
-		compras.put(item, (getQuantidade(item) + 1));
+		if(itens.contains(item)) {
+			int index = itens.lastIndexOf(item);
+			itens.get(index).incrementa();
+		} else {
+			itens.add(item);
+		}
 	}
 	
 	public void remove(Livro livro, TipoLivro tipo) {
 		Item item = geraItem(livro, tipo);
-		compras.remove(item);
+		itens.remove(item);
 	}
 
 	public void incrementa(Livro livro, TipoLivro tipo) {
@@ -39,31 +47,32 @@ public class CarrinhoDeCompras {
 
 	public void decrementa(Livro livro, TipoLivro tipo) {
 		Item item = geraItem(livro, tipo);
-		compras.put(item, (getQuantidade(item) - 1));
-		if(getQuantidade(item) == 0) compras.remove(item);
+		int index = itens.lastIndexOf(item);
+		itens.get(index).decrementa();
+		if(itens.get(index).getQuantidade() == 0) itens.remove(item);
 	}
 	
-	public BigDecimal getTotal() {
-		BigDecimal total = BigDecimal.ZERO;
-		for(Map.Entry<Item, Integer> entry : compras.entrySet()) {
-			BigDecimal somaParcial = total.add(entry.getKey().getPreco().getValor().multiply(BigDecimal.valueOf(entry.getValue())));
-			total = somaParcial;
+	public BigDecimal getSubtotal() {
+		BigDecimal subtotal = BigDecimal.ZERO;
+		for(Item item : itens) {
+			BigDecimal somaParcial = subtotal.add(item.getValorItem());
+			subtotal = somaParcial;
 		}
-		return total;
-	}
-
-	private Integer getQuantidade(Item item) {
-		if (compras.containsKey(item)) {
-			return compras.get(item);
-		} else {
-			return 0;
-		}
+		return subtotal;
 	}
 	
 	private Item geraItem(Livro livro, TipoLivro tipo) {
 		Preco preco = livro.getPrecos().stream().filter(p -> p.getTipoLivro().equals(tipo)).findFirst().orElse(null);
 		Item item = new Item(livro, preco);
 		return item;
+	}
+
+	public BigDecimal totalPedido(HttpSession session) {
+		Cupom cupomAtivo = (Cupom) session.getAttribute("cupomAtivo");
+		if(cupomAtivo != null) {
+			return getSubtotal().multiply((BigDecimal.ONE.add(cupomAtivo.getDesconto().negate())));			
+		}
+		return getSubtotal();
 	}
 		
 }

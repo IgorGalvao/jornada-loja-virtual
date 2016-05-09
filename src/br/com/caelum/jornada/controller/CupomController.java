@@ -2,11 +2,15 @@ package br.com.caelum.jornada.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caelum.jornada.dao.CupomDAO;
 import br.com.caelum.jornada.modelo.Cupom;
@@ -23,43 +27,39 @@ public class CupomController {
 	}
 	
 	@RequestMapping("/admin/cadastroCupons")
-	public String cadastroCupons() {
+	public String cadastroCupons(@ModelAttribute("cupom") Cupom cupom, BindingResult result, Model model) {
+		List<Cupom> lista = dao.listaTodos();
+		model.addAttribute("cupons", lista);
 		return "admin/cadastro_cupons";
 	}
 	
 	@RequestMapping("/admin/cadastraCupom")
-	public String cadastraCupom(Cupom cupom) {
-		dao.cadastra(cupom);
-		return "redirect:/listaCupons";
-	}
-	
-	@RequestMapping("/listaCupons")
-	public ModelAndView listaCupons() {
-		List<Cupom> lista = dao.listaTodos();
-		ModelAndView mv = new ModelAndView("lista_cupons");
-		mv.addObject("cupons", lista);
-		return mv;
+	public String cadastraCupom(@ModelAttribute("cupom") @Valid Cupom cupom, BindingResult result, Model model) {
+		if(!result.hasErrors()) {
+			dao.cadastra(cupom);
+			return "redirect:/admin/cadastroCupons";
+		}
+		return cadastroCupons(cupom, result, model);
 	}
 
 	@RequestMapping("/admin/alteraCupom")
-	public ModelAndView preparaAlteracao(Integer id) {
+	public String preparaAlteracao(Integer id, Model model) {
 		Cupom cupom = dao.buscaPorId(id);
-		ModelAndView mv = new ModelAndView("admin/edicao_cupom");
-		mv.addObject("cupom", cupom);
-		return mv;
+		model.addAttribute("cupom", cupom);
+		return "admin/edicao_cupom";
 	}
 	
 	@RequestMapping("/admin/concluirAlteracaoCupom")
-	public String alterar(Cupom cupom) {
+	public String alterarCupom(Cupom cupom) {
 		dao.atualiza(cupom);
-		return "redirect:/listaCupons";
+		return "redirect:/admin/cadastroCupons";
 	}
 	
 	@RequestMapping("admin/removeCupom")
 	public String removeCupom(Integer id) {
 		Cupom cupom = dao.buscaPorId(id);
 		dao.remove(cupom);
-		return "redirect:/listaCupons";
+		return "redirect:/admin/cadastroCupons";
 	}
 
 }

@@ -2,11 +2,15 @@ package br.com.caelum.jornada.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caelum.jornada.dao.UsuarioDAO;
 import br.com.caelum.jornada.modelo.Usuario;
@@ -23,36 +27,32 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("/admin/cadastroUsuarios")
-	public String cadastroUsuarios() {
+	public String cadastroUsuarios(@ModelAttribute("usuario") Usuario usuario, BindingResult result, Model model) {
+		List<Usuario> lista = dao.listaTodos();
+		model.addAttribute("usuarios", lista);
 		return "admin/cadastro_usuarios";
 	}
 	
 	@RequestMapping("/admin/cadastraUsuario")
-	public String cadastraUsuario(Usuario usuario) {
-		dao.cadastra(usuario);
-		return "redirect:/listaUsuarios";
+	public String cadastraUsuario(@Valid Usuario usuario, BindingResult result, Model model) {
+		if(!result.hasErrors()) {
+			dao.cadastra(usuario);
+			return "redirect:/listaUsuarios";			
+		}
+		return cadastroUsuarios(usuario, result, model);
 	}
 	
-	@RequestMapping("/listaUsuarios")
-	public ModelAndView listaUsuarios() {
-		List<Usuario> lista = dao.listaTodos();
-		ModelAndView mv = new ModelAndView("lista_usuarios");
-		mv.addObject("usuarios", lista);
-		return mv;
-	}
-
 	@RequestMapping("/admin/alteraUsuario")
-	public ModelAndView preparaAlteracao(Integer id) {
+	public String preparaAlteracao(Integer id, Model model) {
 		Usuario usuario = dao.buscaPorId(id);
-		ModelAndView mv = new ModelAndView("admin/edicao_usuario");
-		mv.addObject("usuario", usuario);
-		return mv;
+		model.addAttribute("usuario", usuario);
+		return "admin/edicao_usuario";
 	}
 	
 	@RequestMapping("/admin/concluirAlteracaoUsuario")
-	public String alterar(Usuario usuario) {
+	public String alterarUsuario(Usuario usuario) {
 		dao.atualiza(usuario);
-		return "redirect:/listaUsuarios";
+		return "redirect:/admin/cadastroUsuarios";
 	}
 	
 	@RequestMapping("/admin/removeUsuario")

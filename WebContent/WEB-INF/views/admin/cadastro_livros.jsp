@@ -9,7 +9,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Cadastro de Livros</title>
 	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>">
-	<link rel="stylesheet" href="<c:url value='/resources/css/estilo.css'/>">
+	<link rel="stylesheet" href="<c:url value='/resources/css/formulario.css'/>">
 </head>
 <body>
 	<header>
@@ -21,34 +21,44 @@
 
 		<form action="<c:url value='/admin/cadastraLivro'/>" method="post">
 
-			<custom:inputLabel type="text" id="titulo" text="Título" />
-
-			<custom:inputLabel type="text" id="capa" text="Capa" />
-
-			<custom:inputLabel type="text" id="autor" text="Autor" />
-
-			<div class="form-group">
-				<label for="categoria">Categoria</label>
-				<select class="form-control" name="categoria">
-					<c:forEach items="${categorias}" var="categoria">
-						<option value="${categoria.id}">${categoria.nome}</option>
-					</c:forEach>
-				</select>
+			<div class="row">
+				<div class="col-sm-6">
+					<custom:inputLabel type="text" id="titulo" text="Título" errorsPath="livro.titulo" />
+				</div>
+				<div class="col-sm-6">
+					<custom:inputLabel type="text" id="capa" text="Capa" errorsPath="livro.capa" />				
+				</div>				
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<custom:inputLabel type="text" id="autor" text="Autor" errorsPath="livro.autor" />				
+				</div>
+				<div class="form-group col-sm-6">
+					<label for="categoria">Categoria</label>
+					<select class="form-control" name="categoria">
+							<option value="">Selecione uma categoria</option>
+						<c:forEach items="${categorias}" var="categoria">
+							<option value="${categoria.id}">${categoria.nome}</option>
+						</c:forEach>
+					</select>
+				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="descricao">Descrição </label>
-				<form:errors path="livro.descricao" cssStyle="color:red"/>
+				<label for="descricao">Descrição (até 500 caracteres)</label>
+				<form:errors path="livro.descricao" cssClass="erro"/>
 				<textarea rows="3" cols="100" name="descricao" class="form-control"></textarea>
 			</div>
 
+			<div class="row">
 			<c:forEach items="${tiposLivros}" var="tipoLivro" varStatus="contador">
-			    <div class="form-group">
+			    <div class="form-group col-sm-4">
 			        <label for="preco_${tipoLivro}">Preço ${tipoLivro.label}</label>
 			        <input type="text" name="precos[${contador.index}].valor" id="preco${tipoLivro}" class="form-control"/>
 			        <input type="hidden" name="precos[${contador.index}].tipoLivro" value="${tipoLivro}"/>
 			    </div>
 			</c:forEach>
+			</div>
 
 			<input type="submit" value="Cadastrar" class="btn">
 

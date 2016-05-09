@@ -7,7 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Login na Aplicação</title>
 	<link rel="stylesheet" href="resources/css/bootstrap.css">
-	<link rel="stylesheet" href="resources/css/estilo.css">
+	<link rel="stylesheet" href="resources/css/login.css">
 </head>
 <body>
 
@@ -30,7 +30,7 @@
 	</header>
 	
 	<div class="container">
-		<h2>Login</h2>
+		<h2 class="text-center">Login</h2>
 			<form action="efetuaLogin" method="post">
 			<div class="form-group">
 				<label for="login">Login</label>
@@ -40,7 +40,7 @@
 				<label for="senha">Senha</label>
 				<input type="password" id="senha" name="senha" class="form-control">
 			</div>
-			<input type="submit" value="Entrar" class="btn">
+			<input type="submit" value="Entrar" class="btn center-block">
 		</form>
 	</div>
 </body>

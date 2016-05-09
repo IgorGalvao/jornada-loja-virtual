@@ -2,7 +2,7 @@ package br.com.caelum.jornada.modelo;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
-import java.util.Map;
+import java.util.List;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -35,11 +35,8 @@ public class Pedido {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Calendar validadeCartao;
 
-	@ManyToOne
-	private Cupom cupom;
-
-//	@ElementCollection(fetch=FetchType.EAGER)
-//	private Map<Livro, Integer> produtos;
+	@ElementCollection(fetch=FetchType.EAGER)
+	private List<Item> produtos;
 	private BigDecimal totalCompra;
 	
 	
@@ -97,11 +94,11 @@ public class Pedido {
 	public void setValidadeCartao(Calendar validadeCartao) {
 		this.validadeCartao = validadeCartao;
 	}
-	public Cupom getCupom() {
-		return cupom;
+	public List<Item> getProdutos() {
+		return produtos;
 	}
-	public void setCupom(Cupom cupom) {
-		this.cupom = cupom;
+	public void setProdutos(List<Item> produtos) {
+		this.produtos = produtos;
 	}
 	public BigDecimal getTotalCompra() {
 		return totalCompra;

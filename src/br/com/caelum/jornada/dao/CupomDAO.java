@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
 import br.com.caelum.jornada.modelo.Livro;
 import br.com.caelum.jornada.modelo.Cupom;
+import br.com.caelum.jornada.modelo.Usuario;
 
 @Repository
 public class CupomDAO {
@@ -33,7 +35,14 @@ public class CupomDAO {
 		return manager.find(Cupom.class, id);
 	}
 	
+	public Cupom buscaPorCodigo(String codigoCupom) {
+		Query query = manager.createQuery("select c from Cupom c where c.codigo = :codigo");
+		query.setParameter("codigo", codigoCupom);
+		return (Cupom) query.getSingleResult();
+	}
+
 	public List<Cupom> listaTodos() {
 		return manager.createQuery("select c from Cupom c").getResultList();
 	}
+
 }

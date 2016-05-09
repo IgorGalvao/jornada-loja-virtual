@@ -5,14 +5,16 @@ import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity @Embeddable
 public class Categoria {
 	
 	@Id @GeneratedValue
 	private Integer id;
-	@NotNull @Column(nullable=false)
+	@NotBlank(message="Favor informar nome da categoria")
+	@Column(nullable=false)
 	private String nome;
 	
 	

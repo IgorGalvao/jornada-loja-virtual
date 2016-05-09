@@ -1,10 +1,17 @@
 package br.com.caelum.jornada.modelo;
 
+import java.math.BigDecimal;
 
+import javax.persistence.Embeddable;
+import javax.persistence.ManyToOne;
+
+@Embeddable
 public class Item {
 
+	@ManyToOne
 	private Livro livro;
 	private Preco preco;
+	private Integer quantidade = 1;
 
 	public Item() {
 		super();
@@ -13,7 +20,9 @@ public class Item {
 	public Item(Livro livro, Preco preco) {
 		this.livro = livro;
 		this.preco = preco;
+		this.quantidade = 1;
 	}
+	
 	public Livro getLivro() {
 		return livro;
 	}
@@ -25,6 +34,22 @@ public class Item {
 	}
 	public void setPreco(Preco preco) {
 		this.preco = preco;
+	}
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+	
+	public void incrementa() {
+		quantidade++;
+	}
+	public void decrementa() {
+		quantidade--;
+	}
+	public BigDecimal getValorItem() {
+		return preco.getValor().multiply(BigDecimal.valueOf(quantidade));
 	}
 
 	@Override
@@ -57,7 +82,5 @@ public class Item {
 			return false;
 		return true;
 	}
-	
-	
 	
 }

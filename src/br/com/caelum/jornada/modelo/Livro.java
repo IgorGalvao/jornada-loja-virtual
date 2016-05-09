@@ -12,21 +12,23 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 public class Livro {
 
 	@Id @GeneratedValue
 	private Integer id;
 	@Column(nullable=false)
-	@NotNull
+	@NotBlank(message="Obrigatório informar o título")
 	private String titulo;
-	@NotNull
+	@NotBlank(message="Obrigatório informar o endereço da imagem")
 	private String capa;
 	@Column(nullable=false)
-	@NotNull
+	@NotBlank(message="Obrigatório informar o autor")
 	private String autor;
 	@Column(nullable=false, length=500)
-	@NotNull @Size(min=10, max=500, message="Descrição deve ter entre 10 e 500 caracteres")
+	@NotNull @Size(min=10, max=500, message="Descrição deve ter entre {min} e {max} caracteres")
 	private String descricao;
 	@ManyToOne
 	private Categoria categoria;

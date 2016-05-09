@@ -21,69 +21,80 @@
 		
 		<h2>Preencha os seus dados</h2>
 
-		<form action="confirmarPedido" method="POST">
-
-			<div class="row">
-
-				<fieldset class="col-sm-5">
-					<legend>Dados de entrega</legend>
-					
-					<custom:inputLabel type="text" text="Endereço" id="endereco"/>
-				
-					<custom:inputLabel type="text" text="CEP" id="cep" />
-					
-					<custom:inputLabel type="text" text="Cidade" id="cidade" />
-					
-					<custom:inputLabel type="text" text="UF" id="uf" />
-				</fieldset>
+		<div class="row">
+			<div class="col-sm-8">
+				<form action="confirmarPedido" method="POST">
+					<div class="row">
+						<fieldset class="col-sm-6">
+							<legend>Dados de entrega</legend>
+							
+							<custom:inputLabel type="text" text="Endereço" id="endereco"/>
+						
+							<custom:inputLabel type="text" text="CEP" id="cep" />
+							
+							<div class="row">
+								<div class="col-sm-7">						
+									<custom:inputLabel type="text" text="Cidade" id="cidade" />
+								</div>
+								<div class="col-sm-5">						
+									<custom:inputLabel type="text" text="UF" id="uf" />
+								</div>
+							</div>					
+						</fieldset>
+						<fieldset class="col-sm-6">
+							<legend>Dados de cobrança</legend>
+							
+							<custom:inputLabel type="text" text="Numero do Cartão" id="numeroCartao" />
+							
+							<custom:inputLabel type="text" text="CVV" id="cvvCartao" />
+							
+							<custom:inputLabel type="number" text="Validade (mês)" id="validadeMes" />
+		
+							<custom:inputLabel type="number" text="Validade (ano)" id="validadeAno" />
+						</fieldset>
+					</div>
+					<button type="submit" class="btn btn-primary">Confirmar compra</button>
+				</form>
+			</div>
+			<div class="col-sm-4">
 			
-				<div class="col-sm-4">
-					<fieldset>
-						<legend>Dados de cobrança</legend>
-						
-						<custom:inputLabel type="text" text="Numero do Cartão" id="numeroCartao" />
-						
-						<custom:inputLabel type="text" text="CVV" id="cvvCartao" />
-						
-						<custom:inputLabel type="number" text="Validade (mês)" id="validadeMes" />
-
-						<custom:inputLabel type="number" text="Validade (ano)" id="validadeAno" />
-					</fieldset>
-	
-					<fieldset>
-						<legend>Cupom de desconto</legend>
-						
-						<custom:inputLabel type="text" text="Código do Cupom" id="cupomId" />
-					</fieldset>
-				</div>
-				
-				<div class="col-sm-3">
-				
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">Produtos</h3>
-						</div>
-						<div class="panel-body">Produtos adicionados ao carrinho:</div>
-						<ul class="list-group">
-							<c:forEach items="${carrinho.compras}" var="compra">
-								<li class="list-group-item">
-									<h5>${compra.key.livro.titulo} - ${compra.key.livro.autor}</h5>
-									<p>(${compra.key.preco.tipoLivro}) <fmt:formatNumber type="currency">${compra.key.preco.valor}</fmt:formatNumber> x ${compra.value}</p>
-								</li>
-							</c:forEach>
-						</ul>
-						<div class="panel-footer">
-							<p>Total: <fmt:formatNumber type="currency">${carrinho.total}</fmt:formatNumber></p>
-						</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Produtos no carrinho</h3>
+					</div>
+					<ul class="list-group">
+						<c:forEach items="${carrinho.itens}" var="itemCarrinho">
+							<li class="list-group-item">
+								<h5>${itemCarrinho.livro.titulo} - ${itemCarrinho.livro.autor}</h5>
+								<p>${itemCarrinho.preco.tipoLivro} (${itemCarrinho.quantidade}) - <fmt:formatNumber type="currency">${itemCarrinho.valorItem}</fmt:formatNumber></p>
+							</li>
+						</c:forEach>
+					</ul>
+					<div class="panel-footer">
+						<p>Subtotal: <fmt:formatNumber type="currency">${carrinho.subtotal}</fmt:formatNumber></p>
+						<c:if test="${cupomAtivo != null}">
+							<p>Cupom ${cupomAtivo.codigo}: <fmt:formatNumber type="percent" maxIntegerDigits="2" value="${cupomAtivo.desconto}" /> de desconto</p>
+						</c:if>
+						<strong>Total: <fmt:formatNumber type="currency">${totalPedido}</fmt:formatNumber></strong>
 					</div>
 				</div>
-				
+
+				<c:choose>
+					<c:when test="${cupomAtivo == null}">
+						<form action="incluirCupom" method="post">
+							<fieldset>
+								<legend>Cupom promocional</legend>
+								<custom:inputLabel type="text" text="Código" id="codigoCupom" />
+							</fieldset>
+							<button type="submit" class="btn btn-primary">Utilizar cupom</button>
+						</form>						
+					</c:when>
+					<c:otherwise>
+						<a class="btn btn-primary" href="removerCupom" role="button">Remover Cupom</a>
+					</c:otherwise>
+				</c:choose>
 			</div>
-
-			<button type="submit" class="btn btn-primary">Confirmar compra</button>
-
-		</form>
-		
+		</div>
 	</div> <!-- .container -->
 
 	<script src="<c:url value='/resources/js/jquery-1.11.3.min.js'/>"></script>

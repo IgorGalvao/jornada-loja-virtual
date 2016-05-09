@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,8 +25,6 @@ public class LivroController {
 
 	private LivroDAO dao;
 	private CategoriaDAO categoriaDao;
-	@Autowired
-	private Validator validator;
 	
 	@Autowired
 	public LivroController(LivroDAO dao, CategoriaDAO categoriaDao) {
@@ -42,18 +39,17 @@ public class LivroController {
 
 		List<Categoria> categorias = categoriaDao.listaTodos();
 		model.addAttribute("categorias", categorias);
-
+		
 		return "admin/cadastro_livros";
 	}
 	
 	@RequestMapping("/admin/cadastraLivro")
-	public String cadastraLivro(@Valid Livro livro, BindingResult result) {
+	public String cadastraLivro(@Valid Livro livro, BindingResult result, Model model) {
 		if(!result.hasErrors()) {
 			dao.cadastra(livro);
 			return "redirect:/listaLivros";
-		} else {
-			return "forward:/admin/cadastroLivros";
 		}
+		return cadastroLivros(livro, result, model);
 	}
 	
 	@RequestMapping("/listaLivros")
@@ -81,7 +77,7 @@ public class LivroController {
 	}
 	
 	@RequestMapping("/admin/concluirAlteracaoLivro")
-	public String alterar(Livro livro) {
+	public String alterarLivro(Livro livro) {
 		dao.atualiza(livro);
 		return "redirect:/listaLivros";
 	}

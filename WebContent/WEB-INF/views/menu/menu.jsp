@@ -16,19 +16,18 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="<c:url value='/listaCupons'/>">Cupons</a>
-				<li><a href="<c:url value='/listaUsuarios'/>">Usuários</a>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-			<c:if test="${sessionScope.usuarioLogado.perfil == 'ADMINISTRADOR'}">
+			<c:if test="${usuarioLogado.perfil == 'ADMINISTRADOR'}">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
 							aria-haspopup="true" aria-expanded="false">Administrador<span class="caret"></span></a>
 	  				<ul class="dropdown-menu">
-						<li><a href="<c:url value='/admin/cadastroLivros'/>">Cadastrar livros</a>
-						<li><a href="<c:url value='/admin/cadastroCategorias'/>">Gerenciar categorias</a>
-						<li><a href="<c:url value='/admin/cadastroUsuarios'/>">Cadastrar usuários</a>
-						<li><a href="<c:url value='/admin/cadastroCupons'/>">Cadastrar cupons de desconto</a>
+						<li><a href="<c:url value='/admin/cadastroLivros'/>">Cadastrar novo livro</a>
+						<li role="separator" class="divider">
+						<li><a href="<c:url value='/admin/cadastroUsuarios'/>">Administrar usuários cadastrados</a>
+						<li><a href="<c:url value='/admin/cadastroCategorias'/>">Administrar categorias de livros</a>
+						<li><a href="<c:url value='/admin/cadastroCupons'/>">Administrar cupons de desconto</a>
 					</ul>
 			</c:if>
 				<li><p class="navbar-text">Logado como ${usuarioLogado.login}</p>

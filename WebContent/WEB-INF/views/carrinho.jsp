@@ -19,7 +19,7 @@
 		<h2>Carrinho de Compras</h2>
 
 		<c:choose>
-		<c:when test="${carrinho.total == 0}">
+		<c:when test="${carrinho.subtotal == 0}">
 		
 		<div class="jumbotron"><h3>O carrinho de compras está vazio.</h3></div>
 		
@@ -32,30 +32,33 @@
 					<th>Formato
 					<th>Preço
 					<th>Quantidade
+					<th>Valor total
 					<th>Remover
 			</thead>
 			<tbody>
-				<c:forEach items="${carrinho.compras}" var="compra">
-					<tr><td>${compra.key.livro.titulo} (${compra.key.livro.autor})
-						<td>${compra.key.preco.tipoLivro}
-						<td>${compra.key.preco.valor}
+				<c:forEach items="${carrinho.itens}" var="itemCarrinho">
+					<tr><td>${itemCarrinho.livro.titulo} (${itemCarrinho.livro.autor})
+						<td>${itemCarrinho.preco.tipoLivro}
+						<td><fmt:formatNumber type="currency">${itemCarrinho.preco.valor}</fmt:formatNumber>
 						<td>
-							<a href="decrementaItem?livro=${compra.key.livro.id}&formato=${compra.key.preco.tipoLivro}">
+							<a href="decrementaItem?livro=${itemCarrinho.livro.id}&formato=${itemCarrinho.preco.tipoLivro}">
 								<span class="glyphicon glyphicon-minus"></span>
 							</a>
-							${compra.value}
-							<a href="incrementaItem?livro=${compra.key.livro.id}&formato=${compra.key.preco.tipoLivro}">
+							${itemCarrinho.quantidade}
+							<a href="incrementaItem?livro=${itemCarrinho.livro.id}&formato=${itemCarrinho.preco.tipoLivro}">
 								<span class="glyphicon glyphicon-plus"></span>
 							</a>
 						</td>
-						<td><a href="removerDoCarrinho?livro=${compra.key.livro.id}&formato=${compra.key.preco.tipoLivro}">Remove</a>
+						<td><fmt:formatNumber type="currency">${itemCarrinho.valorItem}</fmt:formatNumber>
+						<td><a href="removerDoCarrinho?livro=${itemCarrinho.livro.id}&formato=${itemCarrinho.preco.tipoLivro}">Remove</a>
 				</c:forEach>
 			</tbody>
 			<tfoot>
-				<tr><td>Total
+				<tr><td>Subtotal
 					<td>
-					<td>${carrinho.total}
 					<td>
+					<td>
+					<td><fmt:formatNumber type="currency">${carrinho.subtotal}</fmt:formatNumber>
 					<td>
 			</tfoot>
 		</table>

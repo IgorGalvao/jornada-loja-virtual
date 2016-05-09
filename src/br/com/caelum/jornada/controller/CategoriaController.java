@@ -2,11 +2,15 @@ package br.com.caelum.jornada.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caelum.jornada.dao.CategoriaDAO;
 import br.com.caelum.jornada.modelo.Categoria;
@@ -23,17 +27,19 @@ public class CategoriaController {
 	}
 
 	@RequestMapping("/admin/cadastroCategorias")
-	public ModelAndView cadastroLivros() {
-		ModelAndView mv = new ModelAndView("admin/cadastro_categorias");
+	public String cadastroCategorias(@ModelAttribute("categoria") Categoria categoria, BindingResult result, Model model) {
 		List<Categoria> lista = dao.listaTodos();
-		mv.addObject("categorias", lista);
-		return mv;
+		model.addAttribute("categorias", lista);
+		return "admin/cadastro_categorias";
 	}	
 	
 	@RequestMapping("/admin/cadastraCategoria")
-	public String cadastraCategoria(Categoria categoria) {
-		dao.cadastra(categoria);
-		return "redirect:/admin/cadastroCategorias";
+	public String cadastraCategoria(@Valid Categoria categoria, BindingResult result, Model model) {
+		if(!result.hasErrors()) {
+			dao.cadastra(categoria);
+			return "redirect:/admin/cadastroCategorias";
+		}
+		return cadastroCategorias(categoria, result, model);
 	}
 	
 	@RequestMapping("/admin/removeCategoria")

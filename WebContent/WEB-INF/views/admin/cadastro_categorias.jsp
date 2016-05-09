@@ -8,22 +8,22 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Categorias de Livros</title>
 	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>">
-	<link rel="stylesheet" href="<c:url value='/resources/css/estilo.css'/>">
+	<link rel="stylesheet" href="<c:url value='/resources/css/formulario.css'/>">
 </head>
 <body>
 	<header>
 		<c:import url="/WEB-INF/views/menu/menu.jsp"/>
 	</header>
 	<div class="container">
-		<h2>Gerenciar categorias de livros</h2>
+		<h2>Gerenciar nova categoria de livros</h2>
 			<form action="<c:url value='/admin/cadastraCategoria'/>" method="post">			
 
-			<custom:inputLabel type="text" text="Nome da Categoria" id="nome" />
+			<custom:inputLabel type="text" text="Nome da Categoria" id="nome" errorsPath="categoria.nome" />
 
 			<input type="submit" value="Cadastrar" class="btn">
 		</form>
 		
-		<h2>Categorias Cadastradas</h2>
+		<h2>Categorias cadastradas</h2>
 		
 		<table class="table">
 			<thead>
@@ -32,10 +32,10 @@
 					<th>Remover
 			</thead>
 			<tbody>
-				<c:forEach items="${categorias}" var="categoria">
-					<tr><td>${categoria.id}
-						<td>${categoria.nome}
-						<td><a href="removeCategoria?id=${categoria.id}">Remove</a>
+				<c:forEach items="${categorias}" var="categoriaLinha">
+					<tr><td>${categoriaLinha.id}
+						<td>${categoriaLinha.nome}
+						<td><a href="removeCategoria?id=${categoriaLinha.id}">Remove</a>
 				</c:forEach>
 			</tbody>
 		</table>
