@@ -6,7 +6,6 @@
 <%@ attribute name="text" required="true" %>
 <%@ attribute name="errorsPath" required="false" %>
 
-
 <div class="form-group">
 	<label for="${id}">${text}</label>
 	<form:errors path="${errorsPath}" cssClass="erro"/>

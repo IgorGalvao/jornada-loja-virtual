@@ -3,6 +3,7 @@ package br.com.caelum.jornada.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -36,9 +37,14 @@ public class CupomDAO {
 	}
 	
 	public Cupom buscaPorCodigo(String codigoCupom) {
-		Query query = manager.createQuery("select c from Cupom c where c.codigo = :codigo");
-		query.setParameter("codigo", codigoCupom);
-		return (Cupom) query.getSingleResult();
+		try {
+			Query query = manager.createQuery("select c from Cupom c where c.codigo = :codigo");
+			query.setParameter("codigo", codigoCupom);
+			return (Cupom) query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+		
 	}
 
 	public List<Cupom> listaTodos() {

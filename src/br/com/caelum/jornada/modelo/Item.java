@@ -20,7 +20,6 @@ public class Item {
 	public Item(Livro livro, Preco preco) {
 		this.livro = livro;
 		this.preco = preco;
-		this.quantidade = 1;
 	}
 	
 	public Livro getLivro() {

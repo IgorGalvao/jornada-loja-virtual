@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="custom" %>
 
 
@@ -30,23 +31,39 @@
 							
 							<custom:inputLabel type="text" text="Endereço" id="endereco"/>
 						
-							<custom:inputLabel type="text" text="CEP" id="cep" />
+							<div class="form-group">
+								<label for="cep">CEP</label>
+								<form:errors path="pedido.cep" cssClass="erro"/>
+								<input type="text" id="cep" name="cep" class="form-control" data-mask="99999-999">
+							</div>
 							
 							<div class="row">
 								<div class="col-sm-7">						
 									<custom:inputLabel type="text" text="Cidade" id="cidade" />
 								</div>
-								<div class="col-sm-5">						
-									<custom:inputLabel type="text" text="UF" id="uf" />
+								<div class="col-sm-5">
+									<div class="form-group">
+										<label for="uf">UF</label>
+										<form:errors path="pedido.uf" cssClass="erro"/>
+										<input type="text" id="uf" name="uf" class="form-control" data-mask="aa">
+									</div>
 								</div>
 							</div>					
 						</fieldset>
 						<fieldset class="col-sm-6">
 							<legend>Dados de cobrança</legend>
 							
-							<custom:inputLabel type="text" text="Numero do Cartão" id="numeroCartao" />
+							<div class="form-group">
+								<label for="numeroCartao">Número do Cartão</label>
+								<form:errors path="pedido.numeroCartao" cssClass="erro"/>
+								<input type="text" id="numeroCartao" name="numeroCartao" class="form-control" data-mask="9999 9999 9999 9999">
+							</div>
 							
-							<custom:inputLabel type="text" text="CVV" id="cvvCartao" />
+							<div class="form-group">
+								<label for="cvvCartao">CVV</label>
+								<form:errors path="pedido.cvvCartao" cssClass="erro"/>
+								<input type="text" id="cvvCartao" name="cvvCartao" class="form-control" data-mask="999">
+							</div>
 							
 							<custom:inputLabel type="number" text="Validade (mês)" id="validadeMes" />
 		
@@ -99,5 +116,6 @@
 
 	<script src="<c:url value='/resources/js/jquery-1.11.3.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>
+	<script src="<c:url value='/resources/js/inputmask-plugin.js'/>"></script>
 </body>
 </html>

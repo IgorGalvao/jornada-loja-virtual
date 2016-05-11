@@ -56,7 +56,7 @@
 			    <div class="form-group col-sm-4">
 			        <label for="preco_${tipoLivro}">Preço ${tipoLivro.label}</label>
 			        <form:errors path="livro.precos[${contador.index}]" cssClass="erro" />
-			        <input type="text" name="precos[${contador.index}].valor" id="preco${tipoLivro}" class="form-control"/>
+			        <input type="text" name="precos[${contador.index}].valor" id="preco${tipoLivro}" class="form-control" />
 			        <input type="hidden" name="precos[${contador.index}].tipoLivro" value="${tipoLivro}"/>
 			    </div>
 			</c:forEach>
@@ -70,6 +70,5 @@
 
 	<script src="<c:url value='/resources/js/jquery-1.11.3.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>
-
 </body>
 </html>

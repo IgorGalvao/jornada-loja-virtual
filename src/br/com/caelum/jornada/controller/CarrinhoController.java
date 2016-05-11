@@ -95,14 +95,14 @@ public class CarrinhoController {
 	@RequestMapping("/confirmarPedido")	
 	public String confirmarPedido(Pedido pedido, HttpSession session, @RequestParam("validadeMes") Integer mes,
 			@RequestParam("validadeAno") Integer ano, Model model) {
-		model.addAttribute("carrinho", carrinho);
-
 		pedido.setUsuario((Usuario)session.getAttribute("usuarioLogado"));
 		pedido.setValidadeCartao(new GregorianCalendar(ano, mes, 01));
 		pedido.setTotalCompra(carrinho.totalPedido(session));
 		pedido.setProdutos(carrinho.getItens());
 
 		pedidoDao.cadastra(pedido);
+		
+		model.addAttribute("pedido", pedido);
 		return "confirmacao";
 	}	
 	
