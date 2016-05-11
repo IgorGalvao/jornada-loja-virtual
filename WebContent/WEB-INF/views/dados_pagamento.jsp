@@ -12,6 +12,7 @@
 	<title>Loja - Fechamento de Compra</title>
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>">
+	<link rel="stylesheet" href="<c:url value='/resources/css/formulario.css'/>">	
 	<link rel="stylesheet" href="<c:url value='/resources/css/fechamento.css'/>">
 </head>
 <body>
@@ -101,7 +102,11 @@
 						<form action="incluirCupom" method="post">
 							<fieldset>
 								<legend>Cupom promocional</legend>
-								<custom:inputLabel type="text" text="Código" id="codigoCupom" />
+								<div class="form-group">
+									<label for="${id}">${text}</label>
+									<c:if test="${erro != null}"><p class="erro">${erro}</p></c:if>
+									<input type="text" id="codigoCupom" name="codigoCupom" class="form-control">
+								</div>
 							</fieldset>
 							<button type="submit" class="btn btn-primary">Utilizar cupom</button>
 						</form>						

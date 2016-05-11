@@ -21,7 +21,6 @@
 		
 		<div class="jumbotron">
 			<h3>Compra realizada com sucesso.</h3>
-			<p>Disponível para download:</p>
 			<c:forEach items="${pedido.produtos}" var="produto" varStatus="contador">
 				<c:if test="${pedido.produtos[(contador.index)].preco.tipoLivro == 'EBOOK'
 						or pedido.produtos[(contador.index)].preco.tipoLivro == 'COMBO'}">

@@ -1,5 +1,6 @@
 package br.com.caelum.jornada.controller;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
@@ -82,7 +84,18 @@ public class CarrinhoController {
 	@RequestMapping("/incluirCupom")
 	public String incluirCupom(@RequestParam("codigoCupom") String codigoCupom, Model model, HttpSession session) {
 		Cupom cupom = cupomDao.buscaPorCodigo(codigoCupom);
-		session.setAttribute("cupomAtivo", cupom);
+		
+		if(cupom == null) {
+			model.addAttribute("erro", "Cupom não encontrado");
+			return fecharPedido(model, session);
+		}
+
+		if(cupom.getValidade().after(Calendar.getInstance())) {
+			session.setAttribute("cupomAtivo", cupom);
+		} else {
+			model.addAttribute("erro", "Cupom vencido");
+		}
+
 		return fecharPedido(model, session);
 	}
 	
