@@ -1,11 +1,15 @@
 package br.com.caelum.jornada.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.validation.ConstraintViolationException;
 
 import org.springframework.stereotype.Repository;
+
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 import br.com.caelum.jornada.modelo.Categoria;
 

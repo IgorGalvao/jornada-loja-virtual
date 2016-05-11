@@ -8,6 +8,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Loja - Área da Administração</title>
+	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>">
 	<link rel="stylesheet" href="<c:url value='/resources/css/formulario.css'/>">
 </head>
@@ -44,21 +45,29 @@
 				<h2>Usuários cadastrados</h2>
 		<table class="table">
 			<thead>
-				<tr><th>Id
-					<th>Login
+				<tr><th>Usuário
 					<th>Email
-					<th>Perfil
-					<th>Alterar
-					<th>Remover
+					<th>Editar
 			</thead>
 			<tbody>
 				<c:forEach items="${usuarios}" var="usuarioLinha">
-					<tr><td>${usuarioLinha.id}
-						<td>${usuarioLinha.login}
+					<tr><td><div class="row">
+								<div class="col-sm-5">
+									${usuarioLinha.login}
+								</div>
+								<div class="col-sm-7">
+									${usuarioLinha.perfil}
+								</div>
+							</div>
 						<td>${usuarioLinha.email}
-						<td>${usuarioLinha.perfil}
-						<td><a href="alteraUsuario?id=${usuarioLinha.id}">Altera</a>
-						<td><a href="removeUsuario?id=${usuarioLinha.id}">Remove</a>
+						<td><div class="row">
+								<div class="col-sm-6">
+									<a href="alteraUsuario?id=${usuarioLinha.id}">Alterar</a>
+								</div>
+								<div class="col-sm-6">
+									<a href="removeUsuario?id=${usuarioLinha.id}">Remover</a>
+								</div>
+							</div>
 				</c:forEach>
 			</tbody>
 		</table>

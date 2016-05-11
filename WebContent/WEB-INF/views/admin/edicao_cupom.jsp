@@ -7,8 +7,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Cadastro de Cupons de Desconto</title>
+	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>">
 	<link rel="stylesheet" href="<c:url value='/resources/css/estilo.css'/>">
+	<link rel="stylesheet" href="<c:url value='/resources/css/jquery-ui.css'/>">
 </head>
 <body>
 	<header>
@@ -33,6 +35,13 @@
 	</div>
 	
 	<script src="<c:url value='/resources/js/jquery-1.11.3.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/jquery-ui.js'/>"></script>
 	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>
+	<script>$("#validade").datepicker({
+		dateFormat: "dd/mm/yy",
+		dayNamesMin: [ "D", "S", "T", "Q", "Q", "S", "S" ],
+		monthNames:[ "Janeiro", "Fevereiro", "Março", "Abril", "Maio",
+		             "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" ]
+	});</script>
 </body>
 </html>

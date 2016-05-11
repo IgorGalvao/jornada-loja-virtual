@@ -29,37 +29,45 @@
 		<table class="table">
 			<thead>
 				<tr><th>Livro
-					<th>Formato
-					<th>Preço
 					<th>Quantidade
 					<th>Valor total
-					<th>Remover
 			</thead>
 			<tbody>
 				<c:forEach items="${carrinho.itens}" var="itemCarrinho">
-					<tr><td>${itemCarrinho.livro.titulo} (${itemCarrinho.livro.autor})
-						<td>${itemCarrinho.preco.tipoLivro}
-						<td><fmt:formatNumber type="currency">${itemCarrinho.preco.valor}</fmt:formatNumber>
-						<td>
-							<a href="decrementaItem?livro=${itemCarrinho.livro.id}&formato=${itemCarrinho.preco.tipoLivro}">
-								<span class="glyphicon glyphicon-minus"></span>
-							</a>
-							${itemCarrinho.quantidade}
-							<a href="incrementaItem?livro=${itemCarrinho.livro.id}&formato=${itemCarrinho.preco.tipoLivro}">
-								<span class="glyphicon glyphicon-plus"></span>
-							</a>
+					<tr><td><div class="row">
+								<div class="col-sm-8">
+									${itemCarrinho.livro.titulo} (${itemCarrinho.livro.autor})
+								</div>
+								<div class="col-sm-2">
+									${itemCarrinho.preco.tipoLivro}
+								</div>
+								<div class="col-sm-2">
+									<fmt:formatNumber type="currency">${itemCarrinho.preco.valor}</fmt:formatNumber>
+								</div>
+							</div>
+						<td><div class="row">
+								<div class="col-sm-6">
+								<a href="decrementaItem?livro=${itemCarrinho.livro.id}&formato=${itemCarrinho.preco.tipoLivro}">
+									<span class="glyphicon glyphicon-minus"></span>
+								</a>
+								${itemCarrinho.quantidade}
+								<a href="incrementaItem?livro=${itemCarrinho.livro.id}&formato=${itemCarrinho.preco.tipoLivro}">
+									<span class="glyphicon glyphicon-plus"></span>
+								</a>
+								</div>
+								<div class="col-sm-6">
+									<a href="removerDoCarrinho?livro=${itemCarrinho.livro.id}&formato=${itemCarrinho.preco.tipoLivro}">Remover</a>
+								</div>
+							</div>
 						</td>
 						<td><fmt:formatNumber type="currency">${itemCarrinho.valorItem}</fmt:formatNumber>
-						<td><a href="removerDoCarrinho?livro=${itemCarrinho.livro.id}&formato=${itemCarrinho.preco.tipoLivro}">Remove</a>
+						<td>
 				</c:forEach>
 			</tbody>
 			<tfoot>
 				<tr><td>Subtotal
 					<td>
-					<td>
-					<td>
 					<td><fmt:formatNumber type="currency">${carrinho.subtotal}</fmt:formatNumber>
-					<td>
 			</tfoot>
 		</table>
 		

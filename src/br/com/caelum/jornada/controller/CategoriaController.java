@@ -43,7 +43,7 @@ public class CategoriaController {
 	}
 	
 	@RequestMapping("/admin/removeCategoria")
-	public String removeCategoria(Integer id) {
+	public String removeCategoria(Integer id, Model model) {
 		Categoria categoria = dao.buscaPorId(id);
 		dao.remove(categoria);
 		return "redirect:/admin/cadastroCategorias";
