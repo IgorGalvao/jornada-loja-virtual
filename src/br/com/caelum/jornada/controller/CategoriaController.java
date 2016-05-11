@@ -45,8 +45,10 @@ public class CategoriaController {
 	@RequestMapping("/admin/removeCategoria")
 	public String removeCategoria(Integer id, Model model) {
 		Categoria categoria = dao.buscaPorId(id);
-		dao.remove(categoria);
-		return "redirect:/admin/cadastroCategorias";
+		if(!dao.remove(categoria)) {
+			model.addAttribute("erro", "Categoria está em uso e não pode ser removida");
+		}
+		return "forward:/admin/cadastroCategorias";
 	}
 	
 }

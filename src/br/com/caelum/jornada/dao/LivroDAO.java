@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
+import br.com.caelum.jornada.modelo.Categoria;
 import br.com.caelum.jornada.modelo.Livro;
 
 @Repository
@@ -34,5 +35,11 @@ public class LivroDAO {
 	
 	public List<Livro> listaTodos() {
 		return manager.createQuery("select l from Livro l").getResultList();
+	}
+
+	public boolean existemLivrosCom(Categoria categoria) {
+		List<Livro> livros = manager.createQuery("select l from Livro l where l.categoria = :categoria")
+				.setParameter("categoria", categoria).getResultList();
+		return !livros.isEmpty();
 	}
 }

@@ -26,6 +26,7 @@
 		
 		<h2>Categorias cadastradas</h2>
 		
+		<c:if test="${erro != null}"><p class="erro">${erro}</p></c:if>
 		<table class="table">
 			<thead>
 				<tr><th>Id

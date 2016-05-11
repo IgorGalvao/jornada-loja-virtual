@@ -1,15 +1,12 @@
 package br.com.caelum.jornada.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.validation.ConstraintViolationException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 import br.com.caelum.jornada.modelo.Categoria;
 
@@ -18,14 +15,20 @@ public class CategoriaDAO {
 	
 	@PersistenceContext
 	private EntityManager manager;
+	@Autowired
+	private LivroDAO livroDao;
 	
 	public void cadastra(Categoria categoria) {
 		manager.persist(categoria);
 	}
 	
-	public void remove(Categoria categoria) {
+	public boolean remove(Categoria categoria) {
 		Categoria categoriaRemover = buscaPorId(categoria.getId());
-		manager.remove(categoriaRemover);
+		if(livroDao.existemLivrosCom(categoria)) {
+			return false;
+		}
+			manager.remove(categoriaRemover);
+			return true;
 	}
 	
 	public Categoria buscaPorId(Integer id) {
