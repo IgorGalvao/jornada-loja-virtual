@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="custom" %>
+<jsp:useBean id="date" class="java.util.Date" />
 
 
 <html>
@@ -30,7 +31,7 @@
 						<fieldset class="col-sm-6">
 							<legend>Dados de entrega</legend>
 							
-							<custom:inputLabel type="text" text="Endereço" id="endereco"/>
+							<custom:inputLabel type="text" text="Endereço" id="endereco" errorsPath="pedido.endereco"/>
 						
 							<div class="form-group">
 								<label for="cep">CEP</label>
@@ -40,7 +41,7 @@
 							
 							<div class="row">
 								<div class="col-sm-7">						
-									<custom:inputLabel type="text" text="Cidade" id="cidade" />
+									<custom:inputLabel type="text" text="Cidade" id="cidade" errorsPath="pedido.cidade" />
 								</div>
 								<div class="col-sm-5">
 									<div class="form-group">
@@ -66,9 +67,33 @@
 								<input type="text" id="cvvCartao" name="cvvCartao" class="form-control" data-mask="999">
 							</div>
 							
-							<custom:inputLabel type="number" text="Validade (mês)" id="validadeMes" />
-		
-							<custom:inputLabel type="number" text="Validade (ano)" id="validadeAno" />
+							<label>Validade</label>
+							<div class="row">
+								<div class="col-sm-5">
+									<div class="form-group">
+										<select class="form-control" name="validadeMes">
+											<option value="">Mês</option>
+											<c:forEach begin="1" end="12" varStatus="contador">
+												<option value="${contador.index}">${contador.index}</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-sm-7">
+									<div class="form-group">
+										<select class="form-control" name="validadeAno">
+											<option value="">Ano</option>
+											<c:forEach begin="0" end="19" varStatus="contador">
+												<option value="${date.getYear() + 1900 + contador.index}">
+													${date.getYear() + 1900 + contador.index}
+												</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>								
+							</div>
+							<form:errors path="cupom.validadeCartao" cssClass="erro" />
 						</fieldset>
 					</div>
 					<button type="submit" class="btn btn-primary">Confirmar compra</button>

@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Pedido {
@@ -24,15 +24,20 @@ public class Pedido {
 	@ManyToOne
 	private Usuario usuario;
 
+	@NotBlank(message="Obrigatório informar endereço")
 	private String endereco;
+	@NotBlank(message="Obrigatório informar cep")
 	private String cep;
+	@NotBlank(message="Obrigatório informar cidade")
 	private String cidade;
+	@NotBlank(message="Obrigatório informar uf")
 	private String uf;
 	
+	@NotBlank(message="Obrigatório informar cartão de crédito")
 	private String numeroCartao;
+	@NotBlank(message="Obrigatório informar CVV do cartão")
 	private String cvvCartao;
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Calendar validadeCartao;
 
 	@ElementCollection(fetch=FetchType.EAGER)

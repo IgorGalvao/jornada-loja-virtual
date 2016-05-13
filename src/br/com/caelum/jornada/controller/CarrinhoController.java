@@ -4,12 +4,14 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
@@ -100,23 +102,34 @@ public class CarrinhoController {
 	}
 	
 	@RequestMapping("/removerCupom")
-	public String removerCupom(Model model, HttpSession session) {
+	public String removerCupom(Model model) {
 		session.removeAttribute("cupomAtivo");
 		return fecharPedido(model);
 	}
 	
-	@RequestMapping("/confirmarPedido")	
-	public String confirmarPedido(Pedido pedido, HttpSession session, @RequestParam("validadeMes") Integer mes,
-			@RequestParam("validadeAno") Integer ano, Model model) {
+	@RequestMapping("/confirmarPedido")
+	public String confirmarPedido(@Valid Pedido pedido, BindingResult result, Model model,
+			@RequestParam("validadeMes") Integer mes, @RequestParam("validadeAno") Integer ano) {
 		pedido.setUsuario((Usuario)session.getAttribute("usuarioLogado"));
-		pedido.setValidadeCartao(new GregorianCalendar(ano, mes, 01));
 		pedido.setTotalCompra(carrinho.totalPedido(session));
 		pedido.setProdutos(carrinho.getItens());
 		
-		pedidoDao.cadastra(pedido);
+		if(mes != null || ano != null)
+			pedido.setValidadeCartao(geraValidade(mes, ano));
 		
-		model.addAttribute("pedido", pedido);
-		return "confirmacao";
+		if(!result.hasErrors()) {
+			pedidoDao.cadastra(pedido);
+			model.addAttribute("pedido", pedido);
+			return "confirmacao";
+		}
+		
+		return fecharPedido(model);
+	}
+
+	private Calendar geraValidade(Integer mes, Integer ano) {
+		Calendar data = new GregorianCalendar(ano, mes-1, 1);
+		data.set(Calendar.DAY_OF_MONTH, data.getActualMaximum(Calendar.DAY_OF_MONTH));
+		return data;
 	}	
 	
 }
