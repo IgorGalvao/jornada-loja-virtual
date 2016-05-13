@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Edição de Livros</title>
+	<title>Área da Administração</title>
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>">
 	<link rel="stylesheet" href="<c:url value='/resources/css/exibicaolivro.css'/>">
+	<link rel="stylesheet" href="<c:url value='/resources/css/formulario.css'/>">
 </head>
 <body>
 	<header>
@@ -35,6 +38,7 @@
 					<input type="hidden" id="capa" name="capa" value="${livro.capa}">
 					<input type="hidden" id="autor" name="autor" value="${livro.autor}">
 					<input type="hidden" id="descricao" name="descricao" value="${livro.descricao}">
+					<input type="hidden" id="categoria" name="categoria" value="${livro.categoria.id}">
 		
 					<div class="panel panel-default">
 						<!-- Default panel contents -->
@@ -47,8 +51,10 @@
 							    <li class="list-group-item">
 								    <div class="form-group">
 								        <label for="preco_${tipoLivro}">Preço ${tipoLivro.label}</label>
+								        <form:errors path="livro.precos[${contador.index}]" cssClass="erro" />
 								        <input type="text" name="precos[${contador.index}].valor" id="preco${tipoLivro}"
-								        		value="${livro.precos[contador.index].valor}" class="form-control"/>
+								        		value="<fmt:formatNumber type="currency">${livro.precos[contador.index].valor}</fmt:formatNumber>"
+								        		class="form-control"/>
 								        <input type="hidden" name="precos[${contador.index}].tipoLivro" value="${tipoLivro}"/>
 								    </div>
 								</li>

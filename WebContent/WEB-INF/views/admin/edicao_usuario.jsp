@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Cadastro de Usuários</title>
+	<title>Área da Administração</title>
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>">
-	<link rel="stylesheet" href="<c:url value='/resources/css/estilo.css'/>">
+	<link rel="stylesheet" href="<c:url value='/resources/css/formulario.css'/>">
 </head>
 <body>
 	<header>
@@ -20,14 +21,17 @@
 			<input type="hidden" id="id" name="id" value="${usuario.id}">
 			<div class="form-group">
 				<label for="login">Login</label>
+				<form:errors path="usuario.login" cssClass="erro"/>
 				<input type="text" id="login" name="login" class="form-control" autofocus value="${usuario.login}">
 			</div>
 			<div class="form-group">
 				<label for="senha">Senha</label>
+				<form:errors path="usuario.senha" cssClass="erro"/>
 				<input type="password" id="senha" name="senha" class="form-control" value="${usuario.senha}">
 			</div>
 			<div class="form-group">
 				<label for="email">Email</label>
+				<form:errors path="usuario.email" cssClass="erro"/>
 				<input type="email" id="email" name="email" class="form-control" value="${usuario.email}">
 			</div>
 			<div class="form-group">

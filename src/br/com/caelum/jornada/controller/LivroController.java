@@ -65,9 +65,10 @@ public class LivroController {
 	}
 
 	@RequestMapping("/admin/alteraLivro")
-	public String preparaAlteracao(Integer id, Model model) {
+	public String preparaAlteracao(@ModelAttribute("livro") Livro livro, BindingResult result, Model model) {
 
-		Livro livro = dao.buscaPorId(id);
+		if(livro.getAutor() == null)
+			livro = dao.buscaPorId(livro.getId());
 		model.addAttribute("livro", livro);
 		
 		List<TipoLivro> tiposLivros = Arrays.asList(TipoLivro.values());
@@ -77,9 +78,12 @@ public class LivroController {
 	}
 	
 	@RequestMapping("/admin/concluirAlteracaoLivro")
-	public String alterarLivro(Livro livro) {
-		dao.atualiza(livro);
-		return "redirect:/listaLivros";
+	public String alterarLivro(@Valid Livro livro, BindingResult result, Model model) {
+		if(!result.hasErrors()) {
+			dao.atualiza(livro);
+			return "redirect:/listaLivros";
+		}
+		return preparaAlteracao(livro, result, model);
 	}
 	
 	@RequestMapping("/admin/removeLivro")

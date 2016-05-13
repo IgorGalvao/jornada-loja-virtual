@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
@@ -37,6 +36,7 @@ public class CarrinhoController {
 	@Autowired private PedidoDAO pedidoDao;
 	@Autowired private UsuarioDAO usuarioDao;
 	@Autowired private CupomDAO cupomDao;
+	@Autowired private HttpSession session;
 	
 	@RequestMapping("/exibirCarrinho")
 	public String exibirCarrinho(Model model) {
@@ -75,19 +75,19 @@ public class CarrinhoController {
 	}
 	
 	@RequestMapping("/fecharPedido")
-	public String fecharPedido(Model model, HttpSession session) {
+	public String fecharPedido(Model model) {
 		model.addAttribute("carrinho", carrinho);
 		model.addAttribute("totalPedido", carrinho.totalPedido(session));			
 		return "dados_pagamento";
 	}
 	
 	@RequestMapping("/incluirCupom")
-	public String incluirCupom(@RequestParam("codigoCupom") String codigoCupom, Model model, HttpSession session) {
+	public String incluirCupom(@RequestParam("codigoCupom") String codigoCupom, Model model) {
 		Cupom cupom = cupomDao.buscaPorCodigo(codigoCupom);
 		
 		if(cupom == null) {
 			model.addAttribute("erro", "Cupom não encontrado");
-			return fecharPedido(model, session);
+			return fecharPedido(model);
 		}
 
 		if(cupom.getValidade().after(Calendar.getInstance())) {
@@ -96,13 +96,13 @@ public class CarrinhoController {
 			model.addAttribute("erro", "Cupom vencido");
 		}
 
-		return fecharPedido(model, session);
+		return fecharPedido(model);
 	}
 	
 	@RequestMapping("/removerCupom")
 	public String removerCupom(Model model, HttpSession session) {
 		session.removeAttribute("cupomAtivo");
-		return fecharPedido(model, session);
+		return fecharPedido(model);
 	}
 	
 	@RequestMapping("/confirmarPedido")	
@@ -112,7 +112,7 @@ public class CarrinhoController {
 		pedido.setValidadeCartao(new GregorianCalendar(ano, mes, 01));
 		pedido.setTotalCompra(carrinho.totalPedido(session));
 		pedido.setProdutos(carrinho.getItens());
-
+		
 		pedidoDao.cadastra(pedido);
 		
 		model.addAttribute("pedido", pedido);

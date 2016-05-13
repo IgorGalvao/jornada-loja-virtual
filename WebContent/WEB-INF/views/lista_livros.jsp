@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Cadastro de Livros</title>
+	<title>Loja Virtual</title>
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>">
 	<link rel="stylesheet" href="<c:url value='/resources/css/listalivros.css'/>">
@@ -16,7 +16,7 @@
 		<c:import url="/WEB-INF/views/menu/menu.jsp"/>
 	</header>
 	<div class="container">
-		<h2>Livros cadastrados</h2>		
+		<h2>Nossos livros</h2>		
 		
 		<form id="filtro" class="form-horizontal">
 			<div class="row">

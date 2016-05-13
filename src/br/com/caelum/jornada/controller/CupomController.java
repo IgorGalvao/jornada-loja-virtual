@@ -43,16 +43,20 @@ public class CupomController {
 	}
 
 	@RequestMapping("/admin/alteraCupom")
-	public String preparaAlteracao(Integer id, Model model) {
-		Cupom cupom = dao.buscaPorId(id);
+	public String preparaAlteracao(@ModelAttribute("cupom") Cupom cupom, BindingResult result, Model model) {
+		if(cupom.getCodigo() == null);
+			cupom = dao.buscaPorId(cupom.getId());
 		model.addAttribute("cupom", cupom);
 		return "admin/edicao_cupom";
 	}
 	
 	@RequestMapping("/admin/concluirAlteracaoCupom")
-	public String alterarCupom(Cupom cupom) {
-		dao.atualiza(cupom);
-		return "redirect:/admin/cadastroCupons";
+	public String alterarCupom(@Valid Cupom cupom, BindingResult result, Model model) {
+		if(!result.hasErrors()) {
+			dao.atualiza(cupom);
+			return "redirect:/admin/cadastroCupons";			
+		}
+		return preparaAlteracao(cupom, result, model);
 	}
 	
 	@RequestMapping("admin/removeCupom")

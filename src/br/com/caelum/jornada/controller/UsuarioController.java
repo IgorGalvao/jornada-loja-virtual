@@ -37,29 +37,34 @@ public class UsuarioController {
 	public String cadastraUsuario(@Valid Usuario usuario, BindingResult result, Model model) {
 		if(!result.hasErrors()) {
 			dao.cadastra(usuario);
-			return "redirect:/listaUsuarios";			
+			return "redirect:/admin/cadastroUsuarios";
 		}
 		return cadastroUsuarios(usuario, result, model);
 	}
 	
 	@RequestMapping("/admin/alteraUsuario")
-	public String preparaAlteracao(Integer id, Model model) {
-		Usuario usuario = dao.buscaPorId(id);
+	public String preparaAlteracao(@ModelAttribute("usuario") Usuario usuario, BindingResult result, Model model) {
+		if(usuario.getLogin() == null) {
+			usuario = dao.buscaPorId(usuario.getId());
+		}
 		model.addAttribute("usuario", usuario);
 		return "admin/edicao_usuario";
 	}
 	
 	@RequestMapping("/admin/concluirAlteracaoUsuario")
-	public String alterarUsuario(Usuario usuario) {
-		dao.atualiza(usuario);
-		return "redirect:/admin/cadastroUsuarios";
+	public String alterarUsuario(@Valid Usuario usuario, BindingResult result, Model model) {
+		if(!result.hasErrors()) {
+			dao.atualiza(usuario);
+			return "redirect:/admin/cadastroUsuarios";
+		}
+		return preparaAlteracao(usuario, result, model);
 	}
 	
 	@RequestMapping("/admin/removeUsuario")
 	public String removeUsuario(Integer id) {
 		Usuario usuario = dao.buscaPorId(id);
 		dao.remove(usuario);
-		return "redirect:/listaUsuarios";
+		return "redirect:/admin/cadastroUsuarios";
 	}
 
 }

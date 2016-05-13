@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Loja</title>
+	<title>Loja Virtual - Pedido Concluído</title>
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>">
 	<link rel="stylesheet" href="<c:url value='/resources/css/confirmacao.css'/>">
