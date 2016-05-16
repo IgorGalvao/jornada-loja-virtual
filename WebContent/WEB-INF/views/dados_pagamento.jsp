@@ -122,24 +122,26 @@
 					</div>
 				</div>
 
-				<c:choose>
-					<c:when test="${cupomAtivo == null}">
-						<form action="incluirCupom" method="post">
-							<fieldset>
-								<legend>Cupom promocional</legend>
-								<div class="form-group">
-									<label for="${id}">${text}</label>
-									<c:if test="${erro != null}"><p class="erro">${erro}</p></c:if>
-									<input type="text" id="codigoCupom" name="codigoCupom" class="form-control">
-								</div>
-							</fieldset>
-							<button type="submit" class="btn btn-primary">Utilizar cupom</button>
-						</form>						
-					</c:when>
-					<c:otherwise>
-						<a class="btn btn-primary" href="removerCupom" role="button">Remover Cupom</a>
-					</c:otherwise>
-				</c:choose>
+				<div id="divCupom">
+					<c:choose>
+						<c:when test="${cupomAtivo == null}">
+							<form action="incluirCupom" method="post">
+								<fieldset>
+									<legend>Cupom promocional</legend>
+									<div class="form-group">
+										<label for="${id}">${text}</label>
+										<c:if test="${erro != null}"><p class="erro">${erro}</p></c:if>
+										<input type="text" id="codigoCupom" name="codigoCupom" class="form-control">
+									</div>
+								</fieldset>
+								<button type="submit" class="btn btn-primary">Utilizar cupom</button>
+							</form>						
+						</c:when>
+						<c:otherwise>
+							<a class="btn btn-primary" href="removerCupom" role="button">Remover Cupom</a>
+						</c:otherwise>
+					</c:choose>
+				</div>
 			</div>
 		</div>
 	</div> <!-- .container -->

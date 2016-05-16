@@ -12,7 +12,7 @@
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>">
 	<link rel="stylesheet" href="<c:url value='/resources/css/formulario.css'/>">
-	<link rel="stylesheet" href="<c:url value='/resources/css/jquery-ui.css'/>">
+<%-- 	<link rel="stylesheet" href="<c:url value='/resources/css/jquery-ui.css'/>"> --%>
 </head>
 <body>
 	<header>

@@ -44,7 +44,7 @@ public class CupomController {
 
 	@RequestMapping("/admin/alteraCupom")
 	public String preparaAlteracao(@ModelAttribute("cupom") Cupom cupom, BindingResult result, Model model) {
-		if(cupom.getCodigo() == null);
+		if(cupom.getValidade() == null)
 			cupom = dao.buscaPorId(cupom.getId());
 		model.addAttribute("cupom", cupom);
 		return "admin/edicao_cupom";
