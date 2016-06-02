@@ -102,9 +102,15 @@ public class CarrinhoController {
 	}
 	
 	@RequestMapping("/removerCupom")
-	public String removerCupom(Model model) {
+	public void removerCupom() {
+		System.out.println("Entrou no mapping Remover");
 		session.removeAttribute("cupomAtivo");
-		return fecharPedido(model);
+	}
+	
+	@RequestMapping("/refreshCupom")
+	public String refreshCupom() {
+		System.out.println("Entrou no mapping Refresh");
+		return "div_cupom";
 	}
 	
 	@RequestMapping("/confirmarPedido")
@@ -125,7 +131,7 @@ public class CarrinhoController {
 		
 		return fecharPedido(model);
 	}
-
+	
 	private Calendar geraValidade(Integer mes, Integer ano) {
 		Calendar data = new GregorianCalendar(ano, mes-1, 1);
 		data.set(Calendar.DAY_OF_MONTH, data.getActualMaximum(Calendar.DAY_OF_MONTH));

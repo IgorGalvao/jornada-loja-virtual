@@ -32,11 +32,13 @@ public class LivroDAO {
 	public Livro buscaPorId(Integer id) {
 		return manager.find(Livro.class, id);
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	public List<Livro> listaTodos() {
 		return manager.createQuery("select l from Livro l").getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean existemLivrosCom(Categoria categoria) {
 		List<Livro> livros = manager.createQuery("select l from Livro l where l.categoria = :categoria")
 				.setParameter("categoria", categoria).getResultList();

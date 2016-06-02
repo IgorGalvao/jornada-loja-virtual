@@ -35,6 +35,7 @@ public class CategoriaDAO {
 		return manager.find(Categoria.class, id);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Categoria> listaTodos() {
 		return manager.createQuery("select c from Categoria c").getResultList();
 	}

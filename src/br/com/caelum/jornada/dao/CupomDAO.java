@@ -9,9 +9,7 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.caelum.jornada.modelo.Livro;
 import br.com.caelum.jornada.modelo.Cupom;
-import br.com.caelum.jornada.modelo.Usuario;
 
 @Repository
 public class CupomDAO {
@@ -43,10 +41,10 @@ public class CupomDAO {
 			return (Cupom) query.getSingleResult();
 		} catch (NoResultException e) {
 			return null;
-		}
-		
+		}		
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Cupom> listaTodos() {
 		return manager.createQuery("select c from Cupom c").getResultList();
 	}

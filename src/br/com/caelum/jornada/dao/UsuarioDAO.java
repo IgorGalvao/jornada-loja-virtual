@@ -9,7 +9,6 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.caelum.jornada.modelo.Perfil;
 import br.com.caelum.jornada.modelo.Usuario;
 
 @Repository
@@ -35,25 +34,25 @@ public class UsuarioDAO {
 		return manager.find(Usuario.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Usuario> listaTodos() {
 		return manager.createQuery("select u from Usuario u").getResultList();
 	}
 
 	public boolean existeUsuario(Usuario usuario) {
-		if(usuario != null) {
-			Query query = manager.createQuery("select u from Usuario u where u.login = :login and u.senha = :senha");
-			query.setParameter("login", usuario.getLogin());
-			query.setParameter("senha", usuario.getSenha());
-			Usuario retorno;
-			try {
-				retorno = (Usuario) query.getSingleResult();
-				return true;
-			} catch (NoResultException e) {
-				e.printStackTrace();
-				return false;
-			}
+		if(usuario == null)
+			return false;
+		
+		Query query = manager.createQuery("select u from Usuario u where u.login = :login and u.senha = :senha")
+			.setParameter("login", usuario.getLogin())
+			.setParameter("senha", usuario.getSenha());
+		try {
+			query.getSingleResult();
+			return true;
+		} catch (NoResultException e) {
+			e.printStackTrace();
+			return false;
 		}
-		return false;
 	}
 
 	public Usuario buscaPorLogin(String login) {
